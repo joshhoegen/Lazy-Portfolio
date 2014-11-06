@@ -1,0 +1,71 @@
+{
+    "page": {
+        "ukScope": {
+            "name": "ukScope", 
+            "android": {
+                "os": "Android 2.2", 
+                "ui": "Dell Stage"
+            },
+            
+            "iconImage": "img/SCKscope.png",
+            "images": ["img/kaleidoscope.png"],
+            "template": "live.html",
+            "modules": ["kaleidescope"],
+            "description": "This toy will put live video into a kaleidoscope and move to the sound of whatever input you give it.You can either use a microphone or give it a feed from an mp3 player, guitar or from your mixer (Hint-Hint, dj's and vj's). Please mute your computer's output as this is still in beta Works best in Chrome. Some features and controls are not available in Firefox.<br/><br/> -Josh"
+        },
+        "sckScope": {
+            "name": "sckScope", 
+            "android": {
+                "os": "Android 2.2", 
+                "ui": "Dell Stage"
+            },
+            
+            "iconImage": "img/SCKscope.png",
+            "images": ["img/kaleidoscope.png"],
+            "template": "soundcloud",
+            "description": "This toy will put your favorite <a href=\"http://soundcloud.com/byutifu/\">SoundCloud</a> tracks into a kaleidoscope and move the track's image to the beat of the song!"
+        },
+        "Flickr": {
+            "name": "Flickr | Art", 
+            "url": "http://flickr.com/photos/joshhoegen",
+            
+            "iconImage": "img/flickr.png",
+            "images": ["img/flickr.png"],
+            "modules": ["kaleidescope"],
+            "description": "This toy will put live video into a kaleidoscope and move to the sound of whatever input you give it.You can either use a microphone or give it a feed from an mp3 player, guitar or from your mixer (Hint-Hint, dj's and vj's). Please mute your computer's output as this is still in beta Works best in Chrome. Some features and controls are not available in Firefox.<br/><br/> -Josh"
+        },
+        "Instagram": {
+            "name": "Instagram | Art", 
+            "url": "http://instagram.com/joshhoegen",
+            
+            "iconImage": "img/instagram.png",
+            "images": ["img/instagram.png"],
+            "modules": ["kaleidescope"],
+            "description": "This toy will put live video into a kaleidoscope and move to the sound of whatever input you give it.You can either use a microphone or give it a feed from an mp3 player, guitar or from your mixer (Hint-Hint, dj's and vj's). Please mute your computer's output as this is still in beta Works best in Chrome. Some features and controls are not available in Firefox.<br/><br/> -Josh"
+        },
+        "GitHub": {
+            "name": "Git | Code", 
+            "url": "http://github.com/joshhoegen",
+            
+            "iconImage": "img/github.png",
+            "images": ["img/github.png"],
+            "description": "Not as much stuff as I'd like, but it's there!"
+        },
+        "SoundCloud": {
+            "name": "Sound Cloud | Music", 
+            "url": "http://soundcloud.com/byutifu",
+            
+            "iconImage": "img/soundcloud.png",
+            "images": ["img/soundcloud.png"],
+            "description": "Remix of Jazz and other Retro Artists"
+        },
+        "LinkedIn": {
+            "name": "LinkedIn | Pro Profile", 
+            "url": "http://linkedin.com/pub/josh-hoegen/b/a9/9b8",
+            
+            "iconImage": "img/linkedin.png",
+            "images": ["img/linkedin.png"],
+            "description": "Professional Social Profile"
+        }
+    }
+}

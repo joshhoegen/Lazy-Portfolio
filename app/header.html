@@ -1,0 +1,15 @@
+<div id="jh-nav">
+    <a ng-click="showMenu = !showMenu" class="menu-button"><i class="fa fa-bars"></i></a>
+    <ul ng-controller="pagesList" ng-hide="showMenu" class="pages">
+    <li ng-repeat="Page in pages.page | orderBy:orderProp"
+        class="pages-listing">
+      
+      <a href="{{Page.url}}" class="thumb" ng-bind-html="{{Page.icon | unsafe}}"></a><!--<img ng-src="{{Page.icon}}">-->
+      <a href="{{Page.url}}">{{Page.name}}</a>
+      <p>{{Page.snippet}}</p>
+    </li>
+  </ul>
+</div>
+<img class="logo" src="img/jh-logo-80.png" alt="Josh Hoegen" />
+<h1>Josh Hoegen &raquo; )'( &raquo; &#9835; &raquo; &hearts; &raquo;</h1>
+
