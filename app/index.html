@@ -21,10 +21,11 @@
   <div id="jh-header" ng-include="'header.html'"></div>
   <div id="jh-page">
     <div>
-      <ul ng-controller="aggrList" class="aggr">
+      <ul ng-controller="aggrList" class="aggr" ng-init>
+        {{aggr}}
         <li ng-repeat="post in aggr">
-          
-          <iframe width="100%" height="450" scrolling="no" frameborder="no" ng-src="{{post.embed_url | unsafe}}"></iframe>
+          <img ng-src="{{post.embed_url | unsafe}}" ng-if="post.type=='image'" />
+          <iframe width="100%" height="450" scrolling="no" frameborder="no" ng-if="post.type=='music'" ng-src="{{post.embed_url | unsafe}}"></iframe>
         </li>
       </ul>
     </div>
