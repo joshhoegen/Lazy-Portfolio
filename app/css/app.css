@@ -164,6 +164,11 @@ body.flash audio {
     display: none;
 }
 
+#jh-nav {
+    position: fixed;
+    width: 20%;
+}
+
 #jh-nav ul {
     position: absolute;
     top: 60px;
@@ -202,7 +207,21 @@ button.menu-button {
 }
 
 #jh-page {
-    width: 60%;
+    width: 50%;
     margin: 0 auto;
     background: linear-gradient(#333, #000) no-repeat;
+}
+
+.aggr {
+    margin: 0px;
+    padding: 20px;
+    list-style-type: none;
+}
+
+.aggr li {
+    margin-bottom: 40px;
+}
+
+.aggr img {
+    width: 100%;
 }
