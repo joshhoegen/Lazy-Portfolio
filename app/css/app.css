@@ -3,10 +3,11 @@ body {
     margin: auto;
     width: auto;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    background: #000;
+    background: #333;
     color: #fff;
     text-shadow: 2px 1px 6px #000;
-    background-color: #333;
+    background-image: url(../img/bg-texture.png);
+    background-image: url(../img/bg-texture.png), linear-gradient(to bottom, #333, #252525);
 /*    animation: animatedBackground 400s linear infinite;
     -ms-animation: animatedBackground 400s linear infinite;
     -moz-animation: animatedBackground 400s linear infinite;
@@ -66,7 +67,7 @@ h3 {
   margin: 0px 0px;
 }
 a {
-  color: #00b7ff;
+  color: #008FB0;
 }
 #main {
   clear: both;
@@ -151,7 +152,13 @@ input[type=button]:hover {
     
 }
 #jh-header {
-   text-align: center; 
+    position: fixed;
+    text-align: center;
+    background: #333;
+    background-image: linear-gradient(to bottom, #333, #252525);
+    border-bottom: 1px solid #014352;
+    width: 100%;
+    min-height: 55px;
 }
 audio {
     position: absolute;
@@ -166,33 +173,46 @@ body.flash audio {
 
 #jh-nav {
     position: fixed;
-    width: 20%;
-}
-
-#jh-nav ul {
-    position: absolute;
-    top: 60px;
-    left: 15%;
-    text-align: left;
+    width: 100%;
 }
 
 .menu-button {
-    left: 10px;
-    top: 10px;
+    left: 20px;
+    top: 16px;
+    font-size: 20px;
     position: absolute;
 }
 
 ul.pages {
-  list-style-type: none;
-  margin: 0px;
-  padding: 20px;
-  background-image: linear-gradient(to left, rgba(51, 51, 51, 1), rgba(51, 51, 51, 0));
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    width: 20%;
+    text-align: left;
+    list-style-type: none;
+    margin: 0px;
+    padding: 20px;
 }
 
 ul.pages li {
   list-style-type: none;
-  margin: 0px;
+  margin: 20px 0px;
   padding: 0px;
+}
+
+ul.pages li a {
+    display: block;
+}
+
+ul.pages li a span {
+    font: normal 10px/10px Helvetica, Arial;
+    color: #008FB0;
+    width: 90%;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
 }
 
 li.pages-listing.ng-scope a:link,  li.pages-listing.ng-scope a:visited {
@@ -209,7 +229,8 @@ button.menu-button {
 #jh-page {
     width: 50%;
     margin: 0 auto;
-    background: linear-gradient(#333, #000) no-repeat;
+    padding: 40px 0 0 0;
+    background: linear-gradient(rgba(51, 51, 51, 0), rgba(0, 0, 0, .6)) no-repeat;
 }
 
 .aggr {
@@ -219,9 +240,69 @@ button.menu-button {
 }
 
 .aggr li {
-    margin-bottom: 40px;
+    margin-bottom: 60px;
 }
 
 .aggr img {
     width: 100%;
+    box-shadow: 1px 5px 22px #000;
+}
+
+.aggr iframe {
+    box-shadow: 1px 5px 22px #000;
+}
+
+.aggr h2 {
+    color: #81959D;
+}
+
+.instagram {
+    position: absolute;
+    top: 0px;
+    text-align: center;
+    z-index: -1;
+}
+
+.instagram img.mini {
+    width:10px;
+}
+
+@media (max-width: 1000px) {
+    #jh-page {
+        width: 62%;
+    }
+    ul.pages {
+        width: 18%;
+    }
+}
+
+@media (max-width: 720px) {
+    #jh-page {
+        width: 100%;   
+    }
+    h1 {
+        display: none;
+    }
+    h2 {
+        font-size: 1.3em;
+    }
+    .aggr iframe, .aggr img {
+        width: 110%;
+        margin-left: -5%;
+    }
+    ul.pages {
+        position: absolute;
+        top: 52px;
+        left: 0px;
+        width: 100%;
+        text-align: left;
+        list-style-type: none;
+        margin: 0px;
+        border: 1px solid #000;
+        padding: 20px 20px 20px 40px;
+        background-image: linear-gradient(to left, rgba(51, 51, 51, 1), rgba(0, 0, 0, 1));
+    }
+    img.log {
+        top: 13px;
+    }
 }

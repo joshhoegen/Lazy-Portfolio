@@ -2,7 +2,7 @@
 <html lang="en" ng-app="uscopeApp">
 <head>
   <meta charset="utf-8">
-  <title>Google Pages Gallery</title>
+  <title>Josh Hoegen - Artist | Nerd | Musician</title>
   <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">
 
@@ -12,6 +12,7 @@
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-resource/angular-resource.js"></script>
   <script src="js/modules/pages/pages.js"></script>
+  <script src="js/modules/soundcloud/soundcloud.js"></script>
   <script src="js/modules/aggr/aggr.js"></script>
   <script src="js/modules/kaleidescope/kaleidescope.js"></script>
   <script src="js/lib/soundcloud/sdk.js"></script>
@@ -32,6 +33,9 @@
     <div class="view-container">
       <div ng-view class="view-frame"></div>
     </div>
+  </div>
+  <div class="instagram" ng-controller="aggrList">
+      <img class="mini" ng-repeat="post in aggr" ng-src="{{post.embed_url | unsafe}}" ng-if="post.type=='image'" />
   </div>
 </body>
 </html>

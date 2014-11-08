@@ -1,12 +1,10 @@
+<a ng-click="showMenu = !showMenu" class="menu-button"><i class="fa fa-bars"></i></a>
 <div id="jh-nav">
-    <a ng-click="showMenu = !showMenu" class="menu-button"><i class="fa fa-bars"></i></a>
-    <ul ng-controller="pagesList" ng-hide="showMenu" class="pages">
+    <ul ng-controller="pagesList" ng-show="showMenu" class="pages">
     <li ng-repeat="Page in pages.page | orderBy:orderProp"
         class="pages-listing">
       
-      <a href="{{Page.url}}" class="thumb" ng-bind-html="{{Page.icon | unsafe}}"></a><!--<img ng-src="{{Page.icon}}">-->
-      <a href="{{Page.url}}">{{Page.name}}</a>
-      <p>{{Page.snippet}}</p>
+      <a href="{{Page.url}}" target="_blank">{{Page.icon | unsafe}}{{Page.name}} <span>- {{Page.description}}</span></a>
     </li>
   </ul>
 </div>
