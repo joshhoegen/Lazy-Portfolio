@@ -276,7 +276,8 @@ button.menu-button {
     }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 720px),
+(min-device-pixel-ratio: 3){
     #jh-page {
         width: 100%;   
     }
