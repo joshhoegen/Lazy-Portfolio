@@ -11,7 +11,7 @@
             "images": ["img/kaleidoscope.png"],
             "template": "live.html",
             "modules": ["kaleidescope"],
-            "description": "This toy will put live video into a kaleidoscope and move to the sound of whatever input you give it.You can either use a microphone or give it a feed from an mp3 player, guitar or from your mixer (Hint-Hint, dj's and vj's). Please mute your computer's output as this is still in beta Works best in Chrome. Some features and controls are not available in Firefox.<br/><br/> -Josh"
+            "description": "Interactive video art with jQuery"
         },
         "sckScope": {
             "name": "sckScope", 
@@ -23,7 +23,7 @@
             "iconImage": "img/SCKscope.png",
             "images": ["img/kaleidoscope.png"],
             "template": "soundcloud",
-            "description": "This toy will put your favorite <a href=\"http://soundcloud.com/byutifu/\">SoundCloud</a> tracks into a kaleidoscope and move the track's image to the beat of the song!"
+            "description": "SoundCloud tracks to kaleidescope with jQuery"
         },
         "Flickr": {
             "name": "Flickr | Art", 
@@ -32,7 +32,7 @@
             "iconImage": "img/flickr.png",
             "images": ["img/flickr.png"],
             "modules": ["kaleidescope"],
-            "description": "This toy will put live video into a kaleidoscope and move to the sound of whatever input you give it.You can either use a microphone or give it a feed from an mp3 player, guitar or from your mixer (Hint-Hint, dj's and vj's). Please mute your computer's output as this is still in beta Works best in Chrome. Some features and controls are not available in Firefox.<br/><br/> -Josh"
+            "description": "Visual Art"
         },
         "Instagram": {
             "name": "Instagram | Art", 
@@ -41,7 +41,7 @@
             "iconImage": "img/instagram.png",
             "images": ["img/instagram.png"],
             "modules": ["kaleidescope"],
-            "description": "This toy will put live video into a kaleidoscope and move to the sound of whatever input you give it.You can either use a microphone or give it a feed from an mp3 player, guitar or from your mixer (Hint-Hint, dj's and vj's). Please mute your computer's output as this is still in beta Works best in Chrome. Some features and controls are not available in Firefox.<br/><br/> -Josh"
+            "description": "Art and life in static images"
         },
         "GitHub": {
             "name": "Git | Code", 
@@ -65,7 +65,7 @@
             
             "iconImage": "img/linkedin.png",
             "images": ["img/linkedin.png"],
-            "description": "Professional Social Profile"
+            "description": "Professional profile"
         }
     }
 }
