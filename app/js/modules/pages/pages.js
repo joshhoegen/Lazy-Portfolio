@@ -18,12 +18,11 @@ pages.factory('pages', ['$resource',
 
 pages.controller('pagesList', ['$scope', 'pages',
   function($scope, pages) {
-    $scope.pages = pages.query();
-    console.log(pages);
-    angular.forEach($scope.pages.page, function(v, k) {
-      $scope.pages.page[k]['icon'] = k.toLowerCase();
-      console.log($scope.pages.page);
-    });
+    $scope.pages = pages.query(function(data){
+        angular.forEach(data.page, function(v, k) {
+            data.page[k]['icon'] = k.toLowerCase();
+        });
+    });    
     $scope.orderProp = 'name';
   }]);
 
