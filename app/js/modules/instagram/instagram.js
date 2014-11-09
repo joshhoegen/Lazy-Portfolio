@@ -1,5 +1,4 @@
-angular.
-    module('instagram', []).
+angular.module('instagram', []).
     factory('getInstagram', function($http, $log, $q) {
         return {    
             getImages: function(count){
@@ -20,6 +19,7 @@ angular.
                 var cacheImage, output = {},
                     request = $http.jsonp('https://api.instagram.com/v1/users/' + account.user.id + '/media/recent?access_token=' + account.access_token + '&count=' + (count || 10) + '&callback=JSON_CALLBACK')
                         .success(function(data, status, headers) {
+                            console.log(data);
                              deferred.resolve(data);
                         });
                 return deferred.promise;

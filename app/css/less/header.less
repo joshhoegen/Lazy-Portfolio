@@ -1,0 +1,48 @@
+#jh-header {
+    position: fixed;
+    text-align: center;
+    background: #333;
+    background-image: linear-gradient(to bottom, #333, #252525);
+    border-bottom: 1px solid #014352;
+    width: 100%;
+    min-height: 55px;
+    .menu-button {
+        left: 20px;
+        top: 16px;
+        font-size: 20px;
+        position: absolute;
+        border: 0px;
+        padding: 6px;
+    } 
+    ul.pages {
+        position: absolute;
+        top: 60px;
+        left: 0px;
+        width: 20%;
+        text-align: left;
+        list-style-type: none;
+        margin: 0px;
+        padding: 20px;
+        li {
+            list-style-type: none;
+            margin: 20px 0px;
+            padding: 0px;
+            a:link, a:visited {
+                display: block;
+                color: #fff;
+                text-decoration: none;
+                font: bold 12px/10px Arial, Helvetica;
+                span {
+                    font: normal 10px/10px Helvetica, Arial;
+                    color: #008FB0;
+                    width: 90%;
+                    margin-top: 5px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
