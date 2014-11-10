@@ -2511,7 +2511,7 @@ input[type="button"].btn-block {
 .glyphicon-flag:before {
   content: "\e034";
 }
-.glyphicon-headPagess:before {
+.glyphicon-headphones:before {
   content: "\e035";
 }
 .glyphicon-volume-off:before {
@@ -2829,7 +2829,7 @@ input[type="button"].btn-block {
 .glyphicon-link:before {
   content: "\e144";
 }
-.glyphicon-Pages:before {
+.glyphicon-phone:before {
   content: "\e145";
 }
 .glyphicon-pushpin:before {
@@ -2937,10 +2937,10 @@ input[type="button"].btn-block {
 .glyphicon-compressed:before {
   content: "\e181";
 }
-.glyphicon-earPages:before {
+.glyphicon-earphone:before {
   content: "\e182";
 }
-.glyphicon-Pages-alt:before {
+.glyphicon-phone-alt:before {
   content: "\e183";
 }
 .glyphicon-tower:before {

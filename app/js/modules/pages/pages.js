@@ -4,7 +4,7 @@ var pages = angular.module('pages', ['ngResource']);
 
 pages.factory('pages', ['$resource',
     function ($resource) {
-        var newResource = $resource('open_conf/pages.json', {}, {
+        var newResource = $resource('conf/pages.json', {}, {
             query: {
                 method: 'GET',
                 params: {

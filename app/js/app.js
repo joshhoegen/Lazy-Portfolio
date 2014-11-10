@@ -21,11 +21,9 @@ uscopeApp.config(['$routeProvider',
       when('/art/:name', {
         templateUrl: 'js/modules/pages/templates/detail.html',
         controller: 'pagesDetailCtrl'
+      }).otherwise({
+        templateUrl: 'js/modules/aggr/templates/aggr.html'
       });
-      /*.
-      otherwise({
-        redirectTo: '/'
-      });*/
   }]);
 
 uscopeApp.run(function($rootScope, $templateCache, $location) {
