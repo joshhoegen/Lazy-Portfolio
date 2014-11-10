@@ -4,7 +4,7 @@ var pages = angular.module('pages', ['ngResource']);
 
 pages.factory('pages', ['$resource',
     function ($resource) {
-        var newResource = $resource('open_conf/pages.json', {}, {
+        var newResource = $resource('conf/pages.json', {}, {
             query: {
                 method: 'GET',
                 params: {
@@ -18,12 +18,11 @@ pages.factory('pages', ['$resource',
 
 pages.controller('pagesList', ['$scope', 'pages',
   function($scope, pages) {
-    //console.log(Pages);
-    $scope.pages = pages.query();
-    angular.forEach($scope.pages.page, function(v, k) {
-      
-      v['icon'] = k.toLowerCase()
-    });
+    $scope.pages = pages.query(function(data){
+        angular.forEach(data.page, function(v, k) {
+            data.page[k]['icon'] = k.toLowerCase();
+        });
+    });    
     $scope.orderProp = 'name';
   }]);
 
