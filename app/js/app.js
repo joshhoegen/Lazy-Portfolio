@@ -14,13 +14,12 @@ uscopeApp.config(['$routeProvider',
   function($routeProvider) {
     //#/art/
     $routeProvider.
-      /*when('/art', {
-        templateUrl: 'js/modules/pages/templates/page-list.html',
-        controller: 'pagesListCtrl'
-      }).*/
       when('/art/:name', {
         templateUrl: 'js/modules/pages/templates/detail.html',
-        controller: 'pagesDetailCtrl'
+        controller: 'aggrList'
+      }).when('/music/:name', {
+        templateUrl: 'js/modules/pages/templates/detail.html',
+        controller: 'aggrList'
       }).otherwise({
         templateUrl: 'js/modules/aggr/templates/aggr.html'
       });
