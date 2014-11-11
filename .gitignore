@@ -13,6 +13,7 @@
 # Other
 node_modules/
 app/lib/
+app/dist/
 
 # OS stuff
 .DS_Store
