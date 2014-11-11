@@ -96,6 +96,7 @@ a {
   border-bottom: 1px solid #014352;
   width: 100%;
   min-height: 55px;
+  box-shadow: 0px 4px 11px #000;
 }
 #jh-header .menu-button {
   left: 20px;
