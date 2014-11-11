@@ -1,4 +1,4 @@
-angular.module('soundcloud', []).
+var soundcloud = angular.module('soundcloud', []).
     factory('getSoundcloud', function($http, $log, $q) {
         return {
             getTracks: function(url, count, callback) {
@@ -21,3 +21,5 @@ angular.module('soundcloud', []).
             }
         }
     });
+
+module.exports = soundcloud;

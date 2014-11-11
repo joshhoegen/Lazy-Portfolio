@@ -66,3 +66,5 @@ aggr.controller('aggrList', ['$scope', '$sce', '$http', '$routeParams', 'aggr', 
         );
     }
 ]);
+
+module.exports = aggr;

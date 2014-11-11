@@ -44,3 +44,5 @@ pages.filter('unsafe', function($sce) {
         return $sce.trustAsHtml(val);
     };
 });
+
+module.exports = pages;

@@ -1,18 +1,25 @@
 'use strict';
 
-/* App Module */
-
+var jQuery = require('jquery'),
+  angular = require('angular'),
+  angularRoute = require('../lib/angular-route/angular-route'),
+  angularResource = require('../lib/angular-resource/angular-resource'),
+  SC = require('./lib/soundcloud/sdk'),
+  pages = require('./modules/pages/pages'),
+  instagram = require('./modules/instagram/instagram'),
+  soundcloud = require('./modules/soundcloud/soundcloud'),
+  aggr = require('./modules/aggr/aggr');
+  
+console.log(angular);
+  
 var uscopeApp = angular.module('uscopeApp', [
   'ngRoute',
-  'kaleidescope',
   'pages',
-  'ngAnimate',
   'aggr'
 ]);
 
 uscopeApp.config(['$routeProvider',
   function($routeProvider) {
-    //#/art/
     $routeProvider.
       when('/art/:name', {
         templateUrl: 'js/modules/pages/templates/detail.html',
