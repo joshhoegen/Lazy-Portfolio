@@ -4,24 +4,23 @@ var underscore = require('underscore'),
     browserify = require('gulp-browserify'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
+    less = require('gulp-less'),
     bower = require('bower'),
     mainBowerFiles = require('main-bower-files');
 
 var paths = {
-        sass: {
-            watch: ['./goldwater/static/css/scss/*.scss'],
+        less: {
+            watch: ['./app/css/less/*.less'],
             compile: [
-                './goldwater/static/css/scss/*.scss',
-                '!./goldwater/static/css/scss/_*.scss'
+                './app/css/less/main.less'
+                //'!./goldwater/static/css/scss/_*.scss'
             ],
-            dest: './goldwater/static/css'
+            dest: './app/css/app.css'
         },
         js: {
-            watch: ['./goldwater/static/js/*.js'],
+            watch: ['./app/js/*.js'],
             compile: [
-                './goldwater/static/js/*.js',
-                '!./goldwater/static/js/script.js',
-                '!./goldwater/static/js/config.js'
+                './goldwater/static/js/main.js'
             ],
             dest: './goldwater/static/js',
             file: 'script.js'
@@ -35,52 +34,41 @@ gulp.task('bower', function(cb){
     });
 });
 
-gulp.task('sass', function() {
-    gulp.src(paths.sass.compile)
-        .pipe(sass({errLogToConsole: true}))
-        .pipe(gulp.dest(paths.sass.dest));
+gulp.task('less', function() {
+    gulp.src(['./app/css/less/app.less'])
+        .pipe(less({errLogToConsole: true}))
+        .pipe(gulp.dest('./app/dist/css/'));
 });
 
 gulp.task('js', function(){
-	gulp.src(paths.js.compile)
-        .pipe(uglify())
+	gulp.src('./app/js/app.js')
         .pipe(browserify({
+            insertGlobals: true,
+            debug: true,
             shim: {
                 jquery: {
-                    path: './goldwater/static/js/lib/jquery/dist/jquery.js',
+                    path: './app/lib/jquery/dist/jquery.js',
                     exports: '$'
                 },
-                Bootstrap: {
-                    path: './goldwater/static/js/lib/bootstrap/dist/js/bootstrap.js',
-                    exports: 'Bootstrap',
-                    depends: {
-                        jquery: '$',
-                    }
+                angular: {
+                    path: './app/lib/angular/angular.js',
+                    exports: 'angular'
                 }
             }
         }))
-        .pipe(concat(paths.js.file))
-        .pipe(gulp.dest(paths.js.dest));
-});
-
-gulp.task('js-libs', ['bower'], function(){
-    gulp.src(mainBowerFiles({
-        paths: {
-            bowerDirectory: './goldwater/static/js/components',
-            bowerrc: './.bowerrc',
-            bowerJson: './bower.json'
-        }
-    }), { base: './goldwater/static/js/components' }).pipe(gulp.dest('./goldwater/static/js/lib'));
+        .pipe(gulp.dest('./app/dist/js/'));
+        console.log(gulp.dest('./app/js/main.js'));
 });
 
 gulp.task('watch', function () {
     var onChange = function (evt) {
         console.log('[watcher] File ' + evt.path + ' was ' + evt.type + ', compiling...');
     };
-    gulp.watch(paths.sass.watch, ['sass'])
+    gulp.watch(['./app/css/less/*.less'], ['less'])
         .on('change', onChange);
-    gulp.watch(paths.js.watch, ['js'])
+    gulp.watch(['./app/js/*.js', './gulpfile.js'] ['js'])
         .on('change', onChange);
+        
 });
 
-gulp.task('default', ['sass','js','watch']);
+gulp.task('default', ['less','js','watch']);

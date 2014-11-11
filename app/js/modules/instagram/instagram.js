@@ -1,4 +1,4 @@
-angular.module('instagram', []).
+var instagram = angular.module('instagram', []).
     factory('getInstagram', function($http, $log, $q) {
         return {    
             getImages: function(count){
@@ -26,3 +26,5 @@ angular.module('instagram', []).
             }
         }
     });
+    
+module.exports = instagram;
