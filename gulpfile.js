@@ -8,25 +8,6 @@ var underscore = require('underscore'),
     bower = require('bower'),
     mainBowerFiles = require('main-bower-files');
 
-var paths = {
-        less: {
-            watch: ['./app/css/less/*.less'],
-            compile: [
-                './app/css/less/main.less'
-                //'!./goldwater/static/css/scss/_*.scss'
-            ],
-            dest: './app/css/app.css'
-        },
-        js: {
-            watch: ['./app/js/*.js'],
-            compile: [
-                './goldwater/static/js/main.js'
-            ],
-            dest: './goldwater/static/js',
-            file: 'script.js'
-        }
-    };
-
 gulp.task('bower', function(cb){
   bower.commands.install([], {save: true}, {})
     .on('end', function(installed){
@@ -57,7 +38,6 @@ gulp.task('js', function(){
             }
         }))
         .pipe(gulp.dest('./app/dist/js/'));
-        console.log(gulp.dest('./app/js/main.js'));
 });
 
 gulp.task('watch', function () {
@@ -71,4 +51,4 @@ gulp.task('watch', function () {
         
 });
 
-gulp.task('default', ['less','js','watch']);
+gulp.task('default', ['less', 'bower', 'js','watch']);

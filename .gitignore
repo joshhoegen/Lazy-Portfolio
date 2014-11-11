@@ -12,7 +12,7 @@
 
 # Other
 node_modules/
-app/lib
+app/lib/
 
 # OS stuff
 .DS_Store
