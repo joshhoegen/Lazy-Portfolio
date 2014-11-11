@@ -1,0 +1,19 @@
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+*log.txt
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Other
+node_modules/
+app/lib
+
+# OS stuff
+.DS_Store
+
