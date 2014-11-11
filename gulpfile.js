@@ -2,6 +2,7 @@ var _ = require('underscore'),
     underscoreStr = require('underscore.string'),
     gulp = require('gulp'),
     browserify = require('gulp-browserify'),
+    clean = require('gulp-clean'),
     uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
     less = require('gulp-less'),
@@ -10,7 +11,11 @@ var _ = require('underscore'),
     
 var filesToMove = {
     './app/conf/*': './app/dist/conf/',
-    './app/img/*': './app/dist/img/'
+    './app/img/*': './app/dist/img/',
+    './app/css/font-awesome/css/*': './app/dist/css/font-awesome/css/',
+    './app/css/font-awesome/fonts/**/*': './app/dist/css/font-awesome/fonts/',
+    './app/includes/*': './app/dist/includes/',
+    './app/index.html': './app/'
 };
 
 gulp.task('bower', function(cb){
@@ -64,7 +69,6 @@ gulp.task('watch', function () {
         .on('change', onChange);
     gulp.watch(['./app/js/*.js', './gulpfile.js'] ['js'])
         .on('change', onChange);
-        
 });
 
-gulp.task('default', ['less', 'bower', 'js', 'move']);
+gulp.task('default', ['clean', 'less', 'bower', 'js', 'move']);

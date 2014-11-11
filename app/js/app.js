@@ -4,9 +4,9 @@ var jQuery = require('jquery'),
   angular = require('angular'),
   angularRoute = require('../lib/angular-route/angular-route'),
   angularResource = require('../lib/angular-resource/angular-resource'),
-  SC = require('./lib/soundcloud/sdk'),
   pages = require('./modules/pages/pages'),
   instagram = require('./modules/instagram/instagram'),
+  SC = require('./modules/soundcloud/sdk'),
   soundcloud = require('./modules/soundcloud/soundcloud'),
   aggr = require('./modules/aggr/aggr');
   
