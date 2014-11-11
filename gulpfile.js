@@ -1,4 +1,4 @@
-var underscore = require('underscore'),
+var _ = require('underscore'),
     underscoreStr = require('underscore.string'),
     gulp = require('gulp'),
     browserify = require('gulp-browserify'),
@@ -7,25 +7,11 @@ var underscore = require('underscore'),
     less = require('gulp-less'),
     bower = require('bower'),
     mainBowerFiles = require('main-bower-files');
-
-var paths = {
-        less: {
-            watch: ['./app/css/less/*.less'],
-            compile: [
-                './app/css/less/main.less'
-                //'!./goldwater/static/css/scss/_*.scss'
-            ],
-            dest: './app/css/app.css'
-        },
-        js: {
-            watch: ['./app/js/*.js'],
-            compile: [
-                './goldwater/static/js/main.js'
-            ],
-            dest: './goldwater/static/js',
-            file: 'script.js'
-        }
-    };
+    
+var filesToMove = {
+    './app/conf/*': './app/dist/conf/',
+    './app/img/*': './app/dist/img/'
+};
 
 gulp.task('bower', function(cb){
   bower.commands.install([], {save: true}, {})
@@ -57,7 +43,17 @@ gulp.task('js', function(){
             }
         }))
         .pipe(gulp.dest('./app/dist/js/'));
-        console.log(gulp.dest('./app/js/main.js'));
+});
+
+gulp.task('clean', function(){
+    return gulp.src(['dist/*'], {read:false})
+    .pipe(clean());
+});
+
+gulp.task('move', function(){
+    _.each(filesToMove, function(v, k){
+        gulp.src(k).pipe(gulp.dest(v));
+    });
 });
 
 gulp.task('watch', function () {
@@ -71,4 +67,4 @@ gulp.task('watch', function () {
         
 });
 
-gulp.task('default', ['less','js','watch']);
+gulp.task('default', ['less', 'bower', 'js', 'move']);
