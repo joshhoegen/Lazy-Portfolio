@@ -67,4 +67,4 @@ gulp.task('watch', function () {
         
 });
 
-gulp.task('default', ['less', 'bower', 'js','watch']);
+gulp.task('default', ['less', 'bower', 'js', 'move']);
