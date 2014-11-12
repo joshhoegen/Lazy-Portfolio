@@ -22,6 +22,7 @@ var instagram = angular.module('instagram', []).
                             console.log(data);
                              deferred.resolve(data);
                         });
+                        
                 return deferred.promise;
             }
         }
