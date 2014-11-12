@@ -1,10 +1,10 @@
 var instagram = angular.module('instagram', []).
     factory('getInstagram', function($http, $log, $q) {
         return {    
-            getImages: function(count){
-                var deferred = $q.defer(),
+            getImages: function(instObj, count){
+                var deferred = $q.defer();
                     // Add to open-conf.json
-                    account = account = {
+                    instObj = instObj || {
                         'access_token': '585198746.afb223f.7e34424d217343098ac6974ed1628216',
                         'user': {
                           'username': 'joshhoegen',
@@ -17,7 +17,7 @@ var instagram = angular.module('instagram', []).
                     };
 
                 var cacheImage, output = {},
-                    request = $http.jsonp('https://api.instagram.com/v1/users/' + account.user.id + '/media/recent?access_token=' + account.access_token + '&count=' + (count || 10) + '&callback=JSON_CALLBACK')
+                    request = $http.jsonp('https://api.instagram.com/v1/users/' + instObj.user.id + '/media/recent?access_token=' + instObj.access_token + '&count=' + (count || 10) + '&callback=JSON_CALLBACK')
                         .success(function(data, status, headers) {
                             console.log(data);
                              deferred.resolve(data);

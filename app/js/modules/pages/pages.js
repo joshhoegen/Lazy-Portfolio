@@ -20,7 +20,10 @@ pages.controller('pagesList', ['$scope', 'pages',
   function($scope, pages) {
     $scope.pages = pages.query(function(data){
         angular.forEach(data.page, function(v, k) {
-            data.page[k]['icon'] = k.toLowerCase();
+            data.page[k]['icon'] = v.icon.toLowerCase();
+            if (!v.icon) {
+                data.page[k]['icon'] = 'globe';
+            }
         });
     });    
     $scope.orderProp = 'name';

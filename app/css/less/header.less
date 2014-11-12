@@ -16,6 +16,7 @@
         padding: 6px;
     } 
     ul.pages {
+        .fadeIn;
         position: absolute;
         top: 60px;
         left: 0px;
@@ -24,6 +25,10 @@
         list-style-type: none;
         margin: 0px;
         padding: 20px;
+        &.ng-hide {
+            // TODO: Stop using ng-hide
+            .fadeOut;
+        }
         li {
             list-style-type: none;
             margin: 20px 0px;
