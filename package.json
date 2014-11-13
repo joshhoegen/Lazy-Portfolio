@@ -25,7 +25,7 @@
   "scripts": {
     "postinstall": "bower install",
 
-    "prestart": "npm install; gulp;",
+    "prestart": "rm -rf dist; npm install; gulp;",
     "start": "http-server -p 8000",
 
     "pretest": "npm install",
