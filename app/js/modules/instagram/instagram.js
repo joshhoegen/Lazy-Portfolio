@@ -19,7 +19,6 @@ var instagram = angular.module('instagram', []).
                 var cacheImage, output = {},
                     request = $http.jsonp('https://api.instagram.com/v1/users/' + instObj.user.id + '/media/recent?access_token=' + instObj.access_token + '&count=' + (count || 10) + '&callback=JSON_CALLBACK')
                         .success(function(data, status, headers) {
-                            console.log(data);
                              deferred.resolve(data);
                         });
                         
