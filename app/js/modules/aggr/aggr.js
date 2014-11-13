@@ -15,6 +15,8 @@ aggr.factory('aggrConfig', ['$resource',
         return aggrConf;
 }]).filter('unsafe', function($sce) {
     return $sce.trustAsResourceUrl;
+}).filter('html', function($sce) {
+    return $sce.trustAsHtml;
 }).controller('aggrList', ['$scope', '$sce', '$http', '$routeParams', 'aggrConfig', 'getSoundcloud', 'getInstagram', 'getGoogle',
     function($scope, $sce, $http, $routeParams, aggrConfig, getSoundcloud, getInstagram, getGoogle) {
         $scope.aggr = [];
@@ -69,6 +71,30 @@ aggr.factory('aggrConfig', ['$resource',
             },
             function(error) {
                 console.log('failure loading SoundCloud' + error);
+            }
+        );
+        
+        google.then(
+            function(posts) {
+                var output = [];
+                angular.forEach(posts.items, function(v, k) {
+                    var dateFormat = new Date(v.published).getTime();
+                    v = typeof v.object.attachments !== 'undefined' ? v.object.attachments[0] : v.object;
+                    v.displayName = v.displayName ? v.displayName : '';
+                    console.log(v);
+                    output[k] = {
+                        'title':  v.displayName,
+                        'date': dateFormat,
+                        'description': v.content,
+                        'embed_url': '',
+                        'type': 'text',
+                        'site_url': v.url || v.url
+                    };
+                });
+                $scope.aggr.push.apply($scope.aggr, output);
+            },
+            function(error) {
+                console.log('failure loading Instagram' + error);
             }
         );
     }
