@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10">
+      <!--Body content-->
+
+      <ul class="Pages">
+        <li ng-repeat="Page in Pages | orderBy:orderProp"
+            class="thumbnail Pages-listing">
+          
+          <a href="#/art/{{Page.name}}" class="thumb"><img ng-src="{{Page.imageUrl}}"></a>
+          <a href="#/art/{{Page.name}}">{{Page.name}}</a>
+          <p>{{Page.snippet}}</p>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>
