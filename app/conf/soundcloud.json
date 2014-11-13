@@ -1,14 +1,4 @@
 {
     "client_id": "b2d19575a677c201c6d23c39e408927a",
-    "defaultTracks": [
-        'https://soundcloud.com/byutifu/put-a-spell-on-you',
-        'https://soundcloud.com/trapmusic/thump-by-drezo-subset-remix',
-        'https://soundcloud.com/feedme/love-is-all-i-got',
-        'https://soundcloud.com/byutifu/wizard-of-oz-hearts-if-i-only',
-        'https://soundcloud.com/griz/smash-the-funk-forthcoming',
-        'https://soundcloud.com/glitchhop/kontrol-freqz-by-krossbow',
-        'https://soundcloud.com/trapmusic/sky-hands-by-glockwize',
-        'https://soundcloud.com/skeewiff/skeewiff-theme-from-dave-allen',
-        'https://soundcloud.com/easy-star-records/ticklah-ft-tamar-kali-want-not'
-    ]
+    "default_url": "https://soundcloud.com/byutifu/tracks"
 }

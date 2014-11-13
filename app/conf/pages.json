@@ -7,7 +7,7 @@
                 "ui": "Dell Stage"
             },
             
-            "iconImage": "img/SCKscope.png",
+            "icon": "",
             "images": ["img/kaleidoscope.png"],
             "template": "live.html",
             "modules": ["kaleidescope"],
@@ -20,7 +20,7 @@
                 "ui": "Dell Stage"
             },
             
-            "iconImage": "img/SCKscope.png",
+            "icon": "",
             "images": ["img/kaleidoscope.png"],
             "template": "soundcloud",
             "description": "SoundCloud tracks to kaleidescope with jQuery"
@@ -29,7 +29,7 @@
             "name": "Flickr | Art", 
             "url": "http://flickr.com/photos/joshhoegen",
             
-            "iconImage": "img/flickr.png",
+            "icon": "flickr",
             "images": ["img/flickr.png"],
             "modules": ["kaleidescope"],
             "description": "Visual Art"
@@ -38,7 +38,7 @@
             "name": "Instagram | Art", 
             "url": "http://instagram.com/joshhoegen",
             
-            "iconImage": "img/instagram.png",
+            "icon": "instagram",
             "images": ["img/instagram.png"],
             "modules": ["kaleidescope"],
             "description": "Art and life in static images"
@@ -47,7 +47,7 @@
             "name": "Git | Code", 
             "url": "http://github.com/joshhoegen",
             
-            "iconImage": "img/github.png",
+            "icon": "github",
             "images": ["img/github.png"],
             "description": "Not as much stuff as I'd like, but it's there!"
         },
@@ -55,7 +55,7 @@
             "name": "Sound Cloud | Music", 
             "url": "http://soundcloud.com/byutifu",
             
-            "iconImage": "img/soundcloud.png",
+            "icon": "soundcloud",
             "images": ["img/soundcloud.png"],
             "description": "Remix of Jazz and other Retro Artists"
         },
@@ -63,7 +63,7 @@
             "name": "LinkedIn | Pro Profile", 
             "url": "http://linkedin.com/pub/josh-hoegen/b/a9/9b8",
             
-            "iconImage": "img/linkedin.png",
+            "icon": "linkedin",
             "images": ["img/linkedin.png"],
             "description": "Professional profile"
         }

@@ -10,8 +10,6 @@ var jQuery = require('jquery'),
   soundcloud = require('./modules/soundcloud/soundcloud'),
   aggr = require('./modules/aggr/aggr');
   
-console.log(angular);
-  
 var uscopeApp = angular.module('uscopeApp', [
   'ngRoute',
   'pages',

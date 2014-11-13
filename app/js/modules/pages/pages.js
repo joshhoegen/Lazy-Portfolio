@@ -14,32 +14,20 @@ pages.factory('pages', ['$resource',
         });
         return newResource;
     }
-]);
-
-pages.controller('pagesList', ['$scope', 'pages',
+]).controller('pagesList', ['$scope', 'pages',
   function($scope, pages) {
     $scope.pages = pages.query(function(data){
         angular.forEach(data.page, function(v, k) {
-            data.page[k]['icon'] = k.toLowerCase();
+            if (!v.icon) {
+                data.page[k]['icon'] = 'globe';
+            } else {
+                data.page[k]['icon'] = v.icon.toLowerCase();
+            }
         });
     });    
     $scope.orderProp = 'name';
-  }]);
-
-pages.controller('pagesDetail', ['$scope', '$routeParams', 'pages',
-  function($scope, $routeParams, pages) {
-    var name = $routeParams.name;
-    $scope.pages = pages.get({name: name}, function(pages) {
-      $scope.mainImageUrl = pages[name].images;
-      $scope.PageActive = pages[name];
-    });
-
-    $scope.setImage = function(imageUrl) {
-      $scope.mainImageUrl = imageUrl;
-    }
-  }]);
-
-pages.filter('unsafe', function($sce) {
+  }]).filter('unsafe', function($sce) {
+    // TODO: Move to seutp module, make available for whole project
     return function(val) {
         return $sce.trustAsHtml(val);
     };
