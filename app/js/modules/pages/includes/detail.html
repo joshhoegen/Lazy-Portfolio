@@ -1,0 +1,20 @@
+<!-- <div class="Pages-images">
+  <img ng-src="{{img}}"
+       class="PageActive"
+       ng-repeat="img in Pages.images"
+       ng-class="{active: mainImageUrl==img}">
+</div> -->
+<h1>{{PageActive.name}}</h1>
+<div class="body">
+    {{PageActive.description}}{{PageActive.template}}
+    <div ng-controller="kaleidescope"></div>
+    <!-- <div k-scope-init></div> -->
+</div>
+
+
+
+<!-- <ul class="Pages-thumbs">
+  <li ng-repeat="img in PageActive.images">
+    <img ng-src="{{img}}" ng-click="setImage(img)">
+  </li>
+</ul> -->
