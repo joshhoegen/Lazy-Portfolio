@@ -1,10 +1,11 @@
-angular.module('github', []).
-    factory('getGithub', function($http, $log, $q) {
+angular.module('google', []).
+    factory('getGoogle', function($http, $log, $q) {
         return {    
-            getActivity: function(count){
+            getGoogle: function(){
                 var deferred = $q.defer(),
                     cacheImage, output = {},
-                    request = $http.jsonp('/repos/:owner/:repo/stats/contributors')
+                    //zeta-period-763
+                    request = $http.get('https://www.googleapis.com/plus/v1/people/103713636134156210756/activities/public?maxResults=3&key=AIzaSyBmCqhO68lrdwivtt0tmw7TnrZmvoAlsoc')
                         .success(function(data, status, headers) {
                             console.log(data);
                              deferred.resolve(data);

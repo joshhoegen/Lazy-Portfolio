@@ -6,6 +6,7 @@ var jQuery = require('jquery'),
   angularResource = require('../lib/angular-resource/angular-resource'),
   pages = require('./modules/pages/pages'),
   instagram = require('./modules/instagram/instagram'),
+  google = require('./modules/google/google'),
   SC = require('./modules/soundcloud/sdk'),
   soundcloud = require('./modules/soundcloud/soundcloud'),
   aggr = require('./modules/aggr/aggr');

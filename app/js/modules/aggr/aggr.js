@@ -1,4 +1,4 @@
-var aggr = angular.module('aggr', ['ngResource', 'soundcloud', 'instagram']);
+var aggr = angular.module('aggr', ['ngResource', 'soundcloud', 'instagram', 'google']);
 
 aggr.factory('aggrConfig', ['$resource',
     function ($resource) {
@@ -15,8 +15,8 @@ aggr.factory('aggrConfig', ['$resource',
         return aggrConf;
 }]).filter('unsafe', function($sce) {
     return $sce.trustAsResourceUrl;
-}).controller('aggrList', ['$scope', '$sce', '$http', '$routeParams', 'aggrConfig', 'getSoundcloud', 'getInstagram',
-    function($scope, $sce, $http, $routeParams, aggrConfig, getSoundcloud, getInstagram) {
+}).controller('aggrList', ['$scope', '$sce', '$http', '$routeParams', 'aggrConfig', 'getSoundcloud', 'getInstagram', 'getGoogle',
+    function($scope, $sce, $http, $routeParams, aggrConfig, getSoundcloud, getInstagram, getGoogle) {
         $scope.aggr = [];
         // TODO: Move to seutp module, make available for whole project
         var mobilecheck = function() {
@@ -27,6 +27,7 @@ aggr.factory('aggrConfig', ['$resource',
             conf = aggrConfig.data,
             instagram = getInstagram.getImages(aggrConfig.load('instagram'), (mobilecheck ? 8 : 12)),
             scTracks = getSoundcloud.getTracks(aggrConfig.load('soundcloud'), (mobilecheck ? 4 : 8));
+            google = getGoogle.getGoogle();
         instagram.then(
             function(images) {
                 var output = [];
