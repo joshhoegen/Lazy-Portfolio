@@ -12,6 +12,8 @@ var _ = require('underscore'),
 var filesToMove = {
     './app/conf/*': './dist/conf/',
     './app/img/*': './dist/img/',
+	'./app/cache/*.php': './dist/cache/',
+	'./app/cache/aggr.json': './dist/',
 	'./app/*.html': './dist/',
 	'./app/js/modules/*/includes/*.html': './dist/js/modules/',
     './app/css/font-awesome/css/*': './dist/css/font-awesome/css/',
@@ -53,7 +55,7 @@ gulp.task('js', function(){
 });
 
 gulp.task('clean', function(){
-    return gulp.src(['dist/*'], {read:false})
+    return gulp.src(['./dist/'], {read:false})
     .pipe(clean());
 });
 
@@ -69,7 +71,7 @@ gulp.task('watch', function () {
     };
     gulp.watch(['./app/css/less/*.less'], ['less'])
         .on('change', onChange);
-    gulp.watch(['./app/js/*.js', './gulpfile.js'] ['js'])
+    gulp.watch(['./app/js/modules/**/*.js'] ['js'])
         .on('change', onChange);
 });
 
