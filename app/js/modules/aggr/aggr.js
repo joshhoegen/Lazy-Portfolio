@@ -9,15 +9,16 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
                     method: 'GET'
                 }
             });
-        }
+        },
         aggrConfig.cache = function(params){
-            console.log(params);
+            //console.log(params);
             var deferred = $q.defer();
             $http.get('./cache/proxy.php', {params: params}).success(function(data, status, headers) {
                 deferred.resolve(data);
             });
             return deferred.promise;
-        }
+        },
+        // will accept object to filter/isolate feeds feed('soundcloud') or feed(['soundcloud', 'instagram'])
         aggrConfig.feed = function(){
             //console.log(aggrConfig.load('flickr'))
             var deferred = $q.defer(),
@@ -47,130 +48,116 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
 }).controller('aggrList', ['$scope', '$sce', '$http', '$routeParams', 'aggrConfig', 'getSoundcloud', 'getInstagram', 'getFlickr', 'getGoogle',
     function($scope, $sce, $http, $routeParams, aggrConfig, getSoundcloud, getInstagram, getFlickr, getGoogle) {
         $scope.feeds = aggrConfig.feed();
-        var cash = aggrConfig.cache({json: 'true'}).then(function(data){
-            console.log(data);
-            if (data == '"error"') {
-                /*aggrConfig.cache({aggr: $scope.feeds}).then(function(data){
-                   $scope.cache = data;
-                });*/
-            }
-            //$scope.cache
-        });
-        //aggrConfig.cache({aggr: $scope.feeds});
         $scope.aggr = [];
-        console.log($scope);
-        /*ls = function(){
-                var o = {};
-                angular.forEach({
-                    'instagram': {
-                        'count': (mobilecheck ? 8 : 12)
-                    }, 'soundcloud': {
-                        'count': (mobilecheck ? 4 : 8)
-                    }, 'google': {
-                        'count': 3
+        var formatOutput = function(feed, title, date, type, embedUrl, siteUrl, description){
+            var output = {
+                'title': title,
+                'date': date,
+                'embed_url': embedUrl,
+                'type': type,
+                'site_url': siteUrl,
+                'description': description
+            };
+            return output;
+        },
+        buildScope = function(feed, data){
+            console.log(data);
+            $scope.aggr.push.apply($scope.aggr, data);
+            // TODO: modularize cache
+            aggrConfig.cache({feed: feed, aggr: angular.extend({}, data)});
+        },
+        feedError = function(feed, error) {
+            console.log('failure loading Instagram' + error);
+        };
+        
+        aggrConfig.cache({json: 'true'}).then(function(data){
+            if (typeof data === 'object') {
+                var arr = [];
+                angular.forEach(data, function(v, k){
+                    angular.forEach(v, function(v, k){
+                        arr.push(v);
+                    })
+                });
+                $scope.aggr = arr;
+            } else {
+                // TO DO: Research how to not be redundant with very different data maps.
+                $scope.feeds.instagram.then(
+                    function(images) {
+                        var output = [];
+                        angular.forEach(images.data, function(v, k) {
+                            var dateFormat = new Date(parseInt(v.created_time) * 1000).getTime();
+                            output[k] = formatOutput('instagram',
+                                v.caption.text, dateFormat, 'image',
+                                v.images.standard_resolution.url,
+                                v.link);
+                        });
+                        buildScope('instagram', output);
+                    },
+                    function(error) {
+                        console.log('failure loading Instagram' + error);
                     }
-                }, function(v){
-                    o[k] = JSON.parse(localStorage.getItem('JH'+k)) || getInstagram.getImages(aggrConfig.load('instagram'), (mobilecheck ? 8 : 12));
-                });
-            }
-        $scope.aggr = ls || [];
-        if ($scope.aggr.length != 0) {
-            return;
-        }*/
+                );
+                
+                $scope.feeds.flickr.then(
+                    function(images) {
+                        var output = [];
+                        angular.forEach(images.photos.photo, function(v, k) {
+                            var dateFormat = new Date(parseInt(v.lastupdate)).getTime();
+                            output[k] = formatOutput('flickr',
+                                v.title, dateFormat, 'image',
+                                'https://farm' + v.farm +
+                                    '.staticflickr.com/' + v.server +
+                                    '/' + v.id + '_' + v.secret + '_c.jpg',
+                                v.link);
+                        });
+                        buildScope('flickr', output);
+                    },
+                    function(error) {
+                        console.log('failure loading Instagram' + error);
+                    }
+                );
         
-        $scope.feeds.instagram.then(
-            function(images) {
-                var output = [];
-                angular.forEach(images.data, function(v, k) {
-                    var dateFormat = new Date(parseInt(v.created_time) * 1000).getTime();
-                    output[k] = {
-                        'title': v.caption.text,
-                        'date': dateFormat,
-                        'embed_url': v.images.standard_resolution.url,
-                        'type': 'image',
-                        'site_url': v.link
-                    };
-                });
-                $scope.aggr.push.apply($scope.aggr, output);
-                aggrConfig.cache({feed: 'instagram', aggr: angular.extend({}, output)});
-                //$scope.cache.push.apply($scope.cache, output);
-            },
-            function(error) {
-                console.log('failure loading Instagram' + error);
+                $scope.feeds.soundcloud.then(
+                    function(tracks) {
+                        var output = [];
+                        angular.forEach(tracks, function(v, k) {
+                            var dateFormat = new Date(v.created_at).getTime();
+                            output[k] = formatOutput('soundcloud',
+                                v.title, dateFormat, 'music',
+                                'https://w.soundcloud.com/player/?url=' +
+                                    encodeURIComponent(v.uri) +
+                                    '&amp;auto_play=false&amp;hide_related=false&amp;' +
+                                    'show_comments=true&amp;show_user=true&amp;' +
+                                    'show_reposts=false&amp;visual=true',
+                                v.permalink_url);
+                        });
+                        buildScope('soundcloud', output);
+                    },
+                    function(error) {
+                        console.log('failure loading SoundCloud' + error);
+                    }
+                );
+                $scope.feeds.google.then(
+                    function(posts) {
+                        var output = [];
+                        angular.forEach(posts.items, function(v, k) {
+                            var dateFormat = new Date(v.published).getTime();
+                            v = typeof v.object.attachments !== 'undefined' ? v.object.attachments[0] : v.object;
+                            v.displayName = v.displayName ? v.displayName : '';
+                            output[k] = formatOutput('google',
+                                v.displayName, dateFormat, 'text',
+                                '',
+                                v.url,
+                                v.content);
+                        });
+                        buildScope('google', output);
+                    },
+                    function(error) {
+                        console.log('failure loading Instagram' + error);
+                    }
+                );
             }
-        );
-        
-        $scope.feeds.flickr.then(
-            function(images) {
-                var output = [];
-                angular.forEach(images.photos.photo, function(v, k) {
-                    var dateFormat = new Date(parseInt(v.lastupdate)).getTime();
-                    output[k] = {
-                        'title': v.title,
-                        'date': dateFormat,
-                        'embed_url': 'https://farm' + v.farm +
-                            '.staticflickr.com/' + v.server +
-                            '/' + v.id + '_' + v.secret + '_c.jpg',
-                        'type': 'image',
-                        'site_url': v.link
-                    };
-                });
-                $scope.aggr.push.apply($scope.aggr, output);
-                aggrConfig.cache({feed: 'flickr', aggr: angular.extend({}, output)});
-            },
-            function(error) {
-                console.log('failure loading Instagram' + error);
-            }
-        );
-
-        $scope.feeds.soundcloud.then(
-            function(tracks) {
-                var output = [];
-                angular.forEach(tracks, function(v, k) {
-                    var dateFormat = new Date(v.created_at).getTime();
-                    output[k] = {
-                        'title': v.title,
-                        'type': 'music',
-                        'date': dateFormat,
-                        'embed_url': 'https://w.soundcloud.com/player/?url=' +
-                            encodeURIComponent(v.uri) +
-                            '&amp;auto_play=false&amp;hide_related=false&amp;' +
-                            'show_comments=true&amp;show_user=true&amp;' +
-                            'show_reposts=false&amp;visual=true',
-                        'site_url': v.permalink_url
-                    };
-                });
-                $scope.aggr.push.apply($scope.aggr, output);
-                aggrConfig.cache({feed: 'soundcloud', aggr: angular.extend({}, output)});
-            },
-            function(error) {
-                console.log('failure loading SoundCloud' + error);
-            }
-        );
-        
-        $scope.feeds.google.then(
-            function(posts) {
-                var output = [];
-                angular.forEach(posts.items, function(v, k) {
-                    var dateFormat = new Date(v.published).getTime();
-                    v = typeof v.object.attachments !== 'undefined' ? v.object.attachments[0] : v.object;
-                    v.displayName = v.displayName ? v.displayName : '';
-                    output[k] = {
-                        'title':  v.displayName,
-                        'date': dateFormat,
-                        'description': v.content,
-                        'embed_url': '',
-                        'type': 'text',
-                        'site_url': v.url || v.url
-                    };
-                });
-                $scope.aggr.push.apply($scope.aggr, output);
-                aggrConfig.cache({feed: 'google', aggr: angular.extend({}, output)});
-            },
-            function(error) {
-                console.log('failure loading Instagram' + error);
-            }
-        );
+        });
     }
 ]);
 

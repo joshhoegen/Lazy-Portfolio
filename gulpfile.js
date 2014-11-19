@@ -71,7 +71,7 @@ gulp.task('watch', function () {
     };
     gulp.watch(['./app/css/less/*.less'], ['less'])
         .on('change', onChange);
-    gulp.watch(['./app/js/*.js', './gulpfile.js'] ['js'])
+    gulp.watch(['./app/js/modules/**/*.js'] ['js'])
         .on('change', onChange);
 });
 
