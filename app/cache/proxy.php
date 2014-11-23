@@ -1,11 +1,12 @@
 <?php
 header('Content-Type: application/json');
-$file_name = $_SERVER['DOCUMENT_ROOT'] . 'aggr.json';
-$file = file_get_contents($file);
+$file_name = '../aggr.json';
+$file = file_get_contents($file_name);
 $date = filemtime($file_name);
 
 function write_json($feed, $data){
     global $file_name, $date;
+    $file_write = false;
     $data = json_decode($data);
     $feeds = json_decode(file_get_contents($file_name));
     if($feeds){
@@ -14,14 +15,11 @@ function write_json($feed, $data){
         $feeds = new stdClass();
         $feeds->$feed = $data;
     }
-    if(strtotime($date . ' -1 day') > strtotime('yesterday')) {
+    if($feeds->$feed[0]){
         $file_write = file_put_contents($file_name, json_encode($feeds, JSON_PRETTY_PRINT));
-        if($file_write === false) {
-            return $error = 'There was an error writing this file';
-        }
-        else {
-            $phpObj = json_encode($data); 
-        }
+    }
+    if($file_write === false) {
+        return $error = 'There was an error writing this file';
     }
     return $data;
 }
@@ -29,9 +27,11 @@ function write_json($feed, $data){
 function get_json(){
     global $file_name, $date;
     $json = 'error';
-    //if($date < strtotime('yesterday + 1 second')) {
+    if(strtotime('+1 day', $date) < strtotime('now')) {
+        $json = 'Stale cache.';
+    } else {
         $json = file_get_contents($file_name);
-    //}
+    }
     return $json;
 }
 
@@ -43,4 +43,3 @@ if(isset($_GET['aggr'])) {
 else {
    echo $error = 'no post data to process';
 }
-

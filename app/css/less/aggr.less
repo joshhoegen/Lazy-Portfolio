@@ -4,6 +4,7 @@
     list-style-type: none;
     li {
         margin-bottom: 60px;
+        position: relative;
         img {
             width: 100%;
             box-shadow: 1px 5px 22px #000;
@@ -11,15 +12,35 @@
         iframe {
             box-shadow: 1px 5px 22px #000;
         }
-        .fb_iframe_widget {
-            position: relative;
-            margin: 20px 0;
+        .feed-info {
+            font: normal 11px/12px 'Open Sans', Arial, Helvetica, sans-serif;
+            float: right;
+            color: #ccc;
+            margin-top: 12px;
         }
-        .gplus-wrap {
-            display: inline-block;
-            top: 3px;
-            position: relative;
-            margin: 0 10px;
+        .social-wrap {
+            margin: 14px 0;
+            > div {
+                display: inline-block;
+            }
+            .fb_iframe_widget {
+                position: relative;
+                margin: 0px 10px 0 0;
+                top: -3px;
+            }
+            .gplus-wrap {
+                display: inline-block;
+                top: 3px;
+                position: relative;
+                margin: 0 10px;
+            }
+        }
+        .aggr-text {
+            .text-image {
+                width: 20%;
+                float: left;
+                margin: 0 20px 0 0;
+            }    
         }
     }
 }

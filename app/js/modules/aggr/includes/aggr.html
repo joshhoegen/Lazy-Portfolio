@@ -1,22 +1,31 @@
 <div>
     <ul ng-controller="aggrList" class="aggr">
-      <li ng-repeat="post in aggr | orderBy:'date':true">
+      <li ng-repeat="(feed, post) in aggr | orderBy:'date':true">
         <div ng-if="post.type!='text'">
             <h2 ng-if="post.title!=''">{{post.title}}</h2>
             <img ng-src="{{post.embed_url | unsafe}}" ng-if="post.type=='image'" />
             <iframe width="100%" height="450" scrolling="no" frameborder="no" ng-if="post.type=='music'" ng-src="{{post.embed_url | unsafe}}"></iframe>
-            <div class="fb-like" data-href="{{post.site_url | unsafe}}"
-                data-layout="button"
-                data-action="like"
-                data-show-faces="false"
-                data-share="false"></div>
-            <div class="gplus-wrap">
-                <div class="g-plusone" data-size="medium" data-annotation="none" data-href="{{post.site_url | unsafe}}"></div>
+            <div class="feed-info">From <a ng-href="{{post.site_url | unsafe}}" target="_blank">{{post.feed}}</a> on {{post.date | date:'yyyy-MM-dd'}}</div>
+            <div class="social-wrap">
+                <div class="fb-like"
+                    ng-data-href="{{post.site_url | unsafe}}"
+                    data-layout="button"
+                    data-action="like"
+                    data-show-faces="false"
+                    data-share="false"></div>
+                <div class="g-plusone"
+                    ng-data-href="{{post.site_url | unsafe}}"
+                    data-size="medium"
+                    data-annotation="none"></div>
             </div>
         </div>
-        <div ng-if="post.type=='text'">
+        <div class="aggr-text" ng-if="post.type=='text'">
             <h2 ng-if="post.title!=''">{{post.title}}</h2>
-            <h3 href="{{post.site_url}}" target="_blank" ng-bind-html="post.description | html"></h3>
+            <a ng-href="{{post.site_url | unsafe}}" ng-if="post.url!=''" target="_blank">
+                <img ng-src="{{post.embed_url | unsafe}}" class="text-image" />
+                <h3 href="{{post.site_url}}" target="_blank" ng-bind-html="post.description | html"></h3>
+                <div class="clear"></div>
+            </a>
         </div>
       </li>
     </ul>

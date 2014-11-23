@@ -18,9 +18,8 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
             });
             return deferred.promise;
         },
-        // will accept object to filter/isolate feeds feed('soundcloud') or feed(['soundcloud', 'instagram'])
+        // TODO: Should accept object to filter/isolate feeds feed('soundcloud') or feed(['soundcloud', 'instagram'])
         aggrConfig.feed = function(){
-            //console.log(aggrConfig.load('flickr'))
             var deferred = $q.defer(),
                 mobilecheck = function() {
                     var check = false;
@@ -32,10 +31,8 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
                     flickr: getFlickr.getImages(aggrConfig.load('flickr'), (mobilecheck ? 3 : 6)),
                     soundcloud: getSoundcloud.getTracks(aggrConfig.load('soundcloud'), (mobilecheck ? 4 : 8)),
                     google: getGoogle.getGoogle(aggrConfig.load('google'), 3)
-                };
-            //deferred.resolve(feeds);
-            
-            return feeds; //deferred.promise;
+                };            
+            return feeds;
         }
         return aggrConfig;
     
@@ -52,6 +49,7 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
         var formatOutput = function(feed, title, date, type, embedUrl, siteUrl, description){
             var output = {
                 'title': title,
+                'feed': feed.charAt(0).toUpperCase() + feed.slice(1),
                 'date': date,
                 'embed_url': embedUrl,
                 'type': type,
@@ -61,7 +59,6 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
             return output;
         },
         buildScope = function(feed, data){
-            console.log(data);
             $scope.aggr.push.apply($scope.aggr, data);
             // TODO: modularize cache
             aggrConfig.cache({feed: feed, aggr: angular.extend({}, data)});
@@ -102,13 +99,13 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
                     function(images) {
                         var output = [];
                         angular.forEach(images.photos.photo, function(v, k) {
-                            var dateFormat = new Date(parseInt(v.lastupdate)).getTime();
+                            var dateFormat = new Date(parseInt(v.lastupdate)).getTime() * 1000;
                             output[k] = formatOutput('flickr',
                                 v.title, dateFormat, 'image',
                                 'https://farm' + v.farm +
                                     '.staticflickr.com/' + v.server +
                                     '/' + v.id + '_' + v.secret + '_c.jpg',
-                                v.link);
+                                'http://flickr.com/photos/' + v.owner + '/' + v.id);
                         });
                         buildScope('flickr', output);
                     },
@@ -143,10 +140,23 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
                         angular.forEach(posts.items, function(v, k) {
                             var dateFormat = new Date(v.published).getTime();
                             v = typeof v.object.attachments !== 'undefined' ? v.object.attachments[0] : v.object;
-                            v.displayName = v.displayName ? v.displayName : '';
+                            v.title = v.displayName ? v.displayName :
+                                v.content.replace(/(<([^>]+)>)/ig,' ')
+                                    .split(' ').slice(0, 3).join(' '),
+                            v.displayContent = function(){
+                                var tmp = angular.element("<div></div>");
+                                if (!v.displayName){
+                                    tmp.html(v.content);
+                                    tmp.text().replace(v.title, '')
+                                }
+                                console.log(tmp.text().replace(v.content.replace(/(<([^>]+)>)/ig,' ')
+                                    .split(' ').slice(0, 3).join(' '), ''));
+                                return tmp;
+                            };
+                            v.displayContent();
                             output[k] = formatOutput('google',
-                                v.displayName, dateFormat, 'text',
-                                '',
+                                v.title, dateFormat, 'text',
+                                (v.fullImage ? v.fullImage.url : ''),
                                 v.url,
                                 v.content);
                         });
