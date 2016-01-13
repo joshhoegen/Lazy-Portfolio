@@ -20,7 +20,6 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
         },
         // will accept object to filter/isolate feeds feed('soundcloud') or feed(['soundcloud', 'instagram'])
         aggrConfig.feed = function(){
-            //console.log(aggrConfig.load('flickr'))
             var deferred = $q.defer(),
                 mobilecheck = function() {
                     var check = false;
@@ -34,11 +33,11 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
                     google: getGoogle.getGoogle(aggrConfig.load('google'), 3)
                 };
             //deferred.resolve(feeds);
-            
+
             return feeds; //deferred.promise;
         }
         return aggrConfig;
-    
+
 }]).filter('unsafe', function($sce) {
     return $sce.trustAsResourceUrl;
 
@@ -61,15 +60,30 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
             return output;
         },
         buildScope = function(feed, data){
-            console.log(data);
             $scope.aggr.push.apply($scope.aggr, data);
             // TODO: modularize cache
             aggrConfig.cache({feed: feed, aggr: angular.extend({}, data)});
         },
         feedError = function(feed, error) {
             console.log('failure loading Instagram' + error);
+        },
+        social = function() {
+           (function() {
+             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+             po.src = 'https://apis.google.com/js/platform.js';
+             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+           })();
+           (function(d, s, id) {
+             setTimeout(function(){
+               var js, fjs = d.getElementsByTagName(s)[0];
+               if (d.getElementById(id)) return;
+               js = d.createElement(s); js.id = id;
+               js.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0';
+               fjs.parentNode.insertBefore(js, fjs);
+             }, 3000);
+           }(document, 'script', 'facebook-jssdk'));
         };
-        
+
         aggrConfig.cache({json: 'true'}).then(function(data){
             if (typeof data === 'object') {
                 var arr = [];
@@ -97,7 +111,7 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
                         console.log('failure loading Instagram' + error);
                     }
                 );
-                
+
                 $scope.feeds.flickr.then(
                     function(images) {
                         var output = [];
@@ -116,7 +130,7 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
                         console.log('failure loading Instagram' + error);
                     }
                 );
-        
+
                 $scope.feeds.soundcloud.then(
                     function(tracks) {
                         var output = [];
@@ -157,6 +171,7 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
                     }
                 );
             }
+            social();
         });
     }
 ]);

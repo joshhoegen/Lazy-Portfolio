@@ -20,7 +20,7 @@ function write_json($feed, $data){
             return $error = 'There was an error writing this file';
         }
         else {
-            $phpObj = json_encode($data); 
+            $phpObj = json_encode($data);
         }
     }
     return $data;
@@ -41,6 +41,5 @@ if(isset($_GET['aggr'])) {
     echo get_json();
 }
 else {
-   echo $error = 'no post data to process';
+   echo $error = 'No data to process.';
 }
-
