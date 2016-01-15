@@ -4,18 +4,19 @@ var _ = require('underscore'),
     browserify = require('gulp-browserify'),
     clean = require('gulp-clean'),
     uglify = require('gulp-uglify'),
+    uglifycss = require('gulp-uglifycss'),
     concat = require('gulp-concat'),
     less = require('gulp-less'),
     bower = require('bower'),
     mainBowerFiles = require('main-bower-files');
-    
+
 var filesToMove = {
     './app/conf/*': './dist/conf/',
     './app/img/*': './dist/img/',
-	'./app/cache/*.php': './dist/cache/',
-	'./app/cache/aggr.json': './dist/',
-	'./app/*.html': './dist/',
-	'./app/js/modules/*/includes/*.html': './dist/js/modules/',
+  	'./app/cache/*.php': './dist/cache/',
+  	'./app/cache/aggr.json': './dist/',
+  	'./app/*.html': './dist/',
+  	'./app/js/modules/*/includes/*.html': './dist/js/modules/',
     './app/css/font-awesome/css/*': './dist/css/font-awesome/css/',
     './app/css/font-awesome/fonts/**/*': './dist/css/font-awesome/fonts/',
     './app/includes/*': './dist/includes/',
@@ -32,6 +33,7 @@ gulp.task('bower', function(cb){
 gulp.task('less', function() {
     gulp.src(['./app/css/less/app.less'])
         .pipe(less({errLogToConsole: true}))
+        .pipe(uglifycss())
         .pipe(gulp.dest('./dist/css/'));
 });
 
@@ -51,12 +53,15 @@ gulp.task('js', function(){
                 }
             }
         }))
+        .pipe(uglify({
+          mangle: false
+        }))
         .pipe(gulp.dest('./dist/js/'));
 });
 
 gulp.task('clean', function(){
-    return gulp.src(['./dist/'], {read:false})
-    .pipe(clean());
+    return gulp.src(['./dist/*'], {read:false})
+    .pipe(clean({force: true}));
 });
 
 gulp.task('move', function(){
