@@ -74,13 +74,11 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
            })();
            (function(d, s, id) {
-             setTimeout(function(){
-               var js, fjs = d.getElementsByTagName(s)[0];
-               if (d.getElementById(id)) return;
-               js = d.createElement(s); js.id = id;
-               js.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0';
-               fjs.parentNode.insertBefore(js, fjs);
-             }, 3000);
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) return;
+             js = d.createElement(s); js.id = id;
+             js.src = '//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0';
+             fjs.parentNode.insertBefore(js, fjs);
            }(document, 'script', 'facebook-jssdk'));
         };
 
