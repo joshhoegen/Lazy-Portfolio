@@ -32,9 +32,8 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
                     soundcloud: getSoundcloud.getTracks(aggrConfig.load('soundcloud'), (mobilecheck ? 4 : 8)),
                     google: getGoogle.getGoogle(aggrConfig.load('google'), 3)
                 };
-            //deferred.resolve(feeds);
 
-            return feeds; //deferred.promise;
+            return feeds;
         }
         return aggrConfig;
 

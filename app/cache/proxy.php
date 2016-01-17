@@ -1,7 +1,8 @@
 <?php
 header('Content-Type: application/json');
-$file_name = $_SERVER['DOCUMENT_ROOT'] . 'aggr.json';
-$file = file_get_contents($file);
+$file_name = $_SERVER['DOCUMENT_ROOT'] . '/aggr.json';
+$file = file_get_contents($file_name);
+
 $date = filemtime($file_name);
 
 function write_json($feed, $data){
@@ -14,7 +15,7 @@ function write_json($feed, $data){
         $feeds = new stdClass();
         $feeds->$feed = $data;
     }
-    if(strtotime($date . ' -1 day') > strtotime('yesterday')) {
+    //if(strtotime($date . ' -1 day') > strtotime('yesterday')) {
         $file_write = file_put_contents($file_name, json_encode($feeds, JSON_PRETTY_PRINT));
         if($file_write === false) {
             return $error = 'There was an error writing this file';
@@ -22,7 +23,7 @@ function write_json($feed, $data){
         else {
             $phpObj = json_encode($data);
         }
-    }
+    //}
     return $data;
 }
 
