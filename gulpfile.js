@@ -14,13 +14,13 @@ var filesToMove = {
     './app/conf/*': './dist/conf/',
     './app/img/*': './dist/img/',
   	'./app/cache/*.php': './dist/cache/',
-  	'./app/cache/aggr.json': './dist/',
+  	'./app/cache/*.json': './dist/',
   	'./app/*.html': './dist/',
   	'./app/js/modules/*/includes/*.html': './dist/js/modules/',
     './app/css/font-awesome/css/*': './dist/css/font-awesome/css/',
     './app/css/font-awesome/fonts/**/*': './dist/css/font-awesome/fonts/',
     './app/includes/*': './dist/includes/',
-    './app/index.html': './app/'
+    './app/index.html': './dist/'
 };
 
 gulp.task('bower', function(cb){
@@ -80,4 +80,4 @@ gulp.task('watch', function () {
         .on('change', onChange);
 });
 
-gulp.task('default', ['clean', 'less', 'bower', 'js', 'move']);
+gulp.task('default', ['less', 'bower', 'js', 'move']);
