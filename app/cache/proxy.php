@@ -14,12 +14,12 @@ function write_json($feed, $data){
         $feeds = new stdClass();
         $feeds->$feed = $data;
     }
-    $file_write = file_put_contents($file_name, json_encode($feeds, JSON_PRETTY_PRINT));
+    $file_write = file_put_contents($file_name, json_encode($feeds, JSON_UNESCAPED_UNICODE));
     if($file_write === false) {
         return $error = 'There was an error writing this file';
     }
     else {
-        $phpObj = json_encode($data);
+        $phpObj = json_encode($data, JSON_UNESCAPED_UNICODE);
     }
     return $data;
 }
@@ -36,7 +36,7 @@ function get_json(){
 }
 
 if(isset($_GET['aggr'])) {
-    echo json_encode(write_json($_GET['feed'], $_GET['aggr']));
+    echo json_encode(write_json($_GET['feed'], $_GET['aggr']), JSON_UNESCAPED_UNICODE);
 } elseif(isset($_GET['json'])) {
     echo get_json();
 }
