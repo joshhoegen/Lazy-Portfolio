@@ -87,7 +87,6 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
                 angular.forEach(data, function(v, k){
                     angular.forEach(v, function(v, k){
                         arr.push(v);
-                        console.log(v);
                     })
                 });
                 $scope.aggr = arr;
