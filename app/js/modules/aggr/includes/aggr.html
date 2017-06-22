@@ -1,6 +1,6 @@
 <div>
     <ul ng-controller="aggrList" class="aggr">
-      <li ng-repeat="post in aggr | orderBy:'date':true">
+      <li ng-repeat="post in aggr | orderBy:'date':true" class= "postLi" ng-class="post.type">
         <div ng-if="post.type!='text'">
             <div ng-if="post.type!='image'">
               <h2 ng-if="post.title!=''">{{post.title}}</h2>
