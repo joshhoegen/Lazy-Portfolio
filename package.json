@@ -1,7 +1,7 @@
 {
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
-  "name": "uscope",
+  "name": "lazy-portfolio",
   "description": "Social media connected mash-up site for audio and visual artists.",
   "repository": {
     "type": "git",
