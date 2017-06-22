@@ -2,8 +2,9 @@
 .installed.cfg
 *.egg
 
-# Installer logs
+# logs
 *log.txt
+*.log
 
 # Mr Developer
 .mr.developer.cfg
@@ -17,4 +18,3 @@ dist/
 
 # OS stuff
 .DS_Store
-
