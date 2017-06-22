@@ -30,7 +30,7 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
                     instagram: getInstagram.getImages(aggrConfig.load('instagram'), (mobilecheck ? 8 : 12)),
                     flickr: getFlickr.getImages(aggrConfig.load('flickr'), (mobilecheck ? 3 : 6)),
                     soundcloud: getSoundcloud.getTracks(aggrConfig.load('soundcloud'), (mobilecheck ? 4 : 8)),
-                    google: getGoogle.getGoogle(aggrConfig.load('google'), 3)
+                    google: getGoogle.getGoogle(aggrConfig.load('google'), 5)
                 };
 
             return feeds;
@@ -153,8 +153,15 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
                         var output = [];
                         angular.forEach(posts.items, function(v, k) {
                             var dateFormat = new Date(v.published).getTime();
-                            v = typeof v.object.attachments !== 'undefined' ? v.object.attachments[0] : v.object;
+                            v = v.object;
                             v.displayName = v.displayName ? v.displayName : '';
+                            v.content = '<i class="fa fa-star" aria-hidden="true"></i> '+ v.content;
+                            var attachments = v.attachments && v.attachments.length ? v.attachments : false;
+
+                            if (attachments && attachments[0].fullImage) {
+                              v.content += '<br/><img src="' + attachments[0].fullImage.url+ '" />';
+                            }
+
                             output[k] = formatOutput('google',
                                 v.displayName, dateFormat, 'text',
                                 '',
