@@ -87,6 +87,7 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
                 angular.forEach(data, function(v, k){
                     angular.forEach(v, function(v, k){
                         arr.push(v);
+                        console.log(v);
                     })
                 });
                 $scope.aggr = arr;
@@ -153,8 +154,14 @@ aggr.factory('aggrConfig', ['$resource', '$http', '$q', 'getSoundcloud', 'getIns
                         var output = [];
                         angular.forEach(posts.items, function(v, k) {
                             var dateFormat = new Date(v.published).getTime();
-                            v = typeof v.object.attachments !== 'undefined' ? v.object.attachments[0] : v.object;
+                            v = v.object;
                             v.displayName = v.displayName ? v.displayName : '';
+                            var attachments = v.attachments && v.attachments.length ? v.attachments : false;
+
+                            if (attachments && attachments[0].fullImage) {
+                              v.content += '<img src="' + attachments[0].fullImage.url+ '" />';
+                            }
+
                             output[k] = formatOutput('google',
                                 v.displayName, dateFormat, 'text',
                                 '',
