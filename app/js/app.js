@@ -11,7 +11,7 @@ var jQuery = require('jquery'),
   SC = require('./modules/soundcloud/sdk'),
   soundcloud = require('./modules/soundcloud/soundcloud'),
   aggr = require('./modules/aggr/aggr');
-  
+
 var uscopeApp = angular.module('uscopeApp', [
   'ngRoute',
   'pages',
@@ -40,5 +40,5 @@ uscopeApp.run(function($rootScope, $templateCache, $location) {
       console.log('Constant Cache Clear On.');
     });
   }
-  
+
 });
