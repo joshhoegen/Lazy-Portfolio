@@ -1,7 +1,8 @@
 {
     "page": {
-        "ukScope": {
-            "name": "ukScope", 
+        "byutifuPixels": {
+            "name": "JS Art - Pixels", 
+            "url": "https://byutifu.com",
             "android": {
                 "os": "Android 2.2", 
                 "ui": "Dell Stage"
@@ -11,10 +12,11 @@
             "images": ["img/kaleidoscope.png"],
             "template": "live.html",
             "modules": ["kaleidescope"],
-            "description": "Interactive video art with jQuery"
+            "description": "Interactive video art with React"
         },
-        "sckScope": {
-            "name": "sckScope", 
+        "byutifuKaleidoscope": {
+            "name": "JS Art - Kaleidoscope", 
+            "url": "https://byutifu.com/kaleidoscope",
             "android": {
                 "os": "Android 2.2", 
                 "ui": "Dell Stage"
@@ -23,7 +25,7 @@
             "icon": "",
             "images": ["img/kaleidoscope.png"],
             "template": "soundcloud",
-            "description": "SoundCloud tracks to kaleidescope with jQuery"
+            "description": "Interactive video art with React"
         },
         "Flickr": {
             "name": "Flickr | Art", 
