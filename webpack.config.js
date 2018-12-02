@@ -1,15 +1,16 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 // Is the current build a development build
 const IS_DEV = (process.env.NODE_ENV === 'dev');
 
 const dirNode = 'node_modules';
 const dirApp = path.join(__dirname, 'src');
-const dirAssets = path.join(__dirname, 'src/assets');
+const dirAssets = path.join(__dirname, 'assets');
 
-const appHtmlTitle = 'Webpack Boilerplate';
+const appHtmlTitle = 'Josh Hoegen';
 
 /**
  * Webpack Configuration
@@ -36,7 +37,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src/index.ejs'),
       title: appHtmlTitle
-    })
+    }),
+
+    new CopyWebpackPlugin([
+      {from:'src/assets',to:'assets'}
+    ])
   ],
   module: {
     rules: [
