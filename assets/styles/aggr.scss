@@ -1,0 +1,55 @@
+.aggr {
+	margin: 0px;
+	padding: 20px;
+	list-style-type: none;
+}
+
+.aggr li {
+	margin-bottom: 60px;
+}
+
+.aggr li .google-img {
+	margin-top: 20px;
+}
+
+.aggr li img {
+	width: 100%;
+	box-shadow: 1px 5px 22px #000;
+}
+
+.aggr li .fb_iframe_widget {
+	position: relative;
+	margin: 20px 0;
+}
+
+.aggr li .gplus-wrap {
+	display: inline-block;
+	top: 3px;
+	position: relative;
+	margin: 0 10px 0 0;
+}
+
+.aggr li .fa.fa-star {
+	color: #008fb0;
+	font-size: 23px;
+	margin-right: 6px;
+}
+
+.aggr h3 {
+  display: inline;
+}
+
+.aggr h3 b {
+	font-size: 23px;
+	line-height: 30px;
+}
+
+.aggr .date {
+  float: right;
+  display: inline-block;
+  color: #565454;
+}
+
+.aggr .title-container {
+  margin-bottom: 10px;
+}
