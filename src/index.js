@@ -4,7 +4,7 @@ import Header from './components/header'
 
 import Aggr from './feeds/_all'
 
-import '../assets/styles/app.scss'
+import './assets/styles/app.scss'
 
 const feedAggr = new Aggr()
 
