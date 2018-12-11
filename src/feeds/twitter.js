@@ -1,15 +1,15 @@
 import GetFeed from '../utils/service'
 import twitterConfig from '../assets/conf/twitter'
 
-var Twit = require('twit')
-
-var T = new Twit({
-  consumer_key:         twitterConfig.consumer_key,
-  consumer_secret:      twitterConfig.consumer_secret,
-  access_token:         twitterConfig.access_token,
-  access_token_secret:  twitterConfig.access_token_secret,
-  timeout_ms:           10*1000,
-})
+// var Twit = require('twit')
+//
+// var T = new Twit({
+//   consumer_key:         twitterConfig.consumer_key,
+//   consumer_secret:      twitterConfig.consumer_secret,
+//   access_token:         twitterConfig.access_token,
+//   access_token_secret:  twitterConfig.access_token_secret,
+//   timeout_ms:           10*1000,
+// })
 
 //statuses/user_timeline.json
 
