@@ -1,6 +1,7 @@
 import googleFeed from './google'
 import flickrFeed from './flickr'
 import soundcloudFeed from './soundcloud'
+// import twitter from './twitter'
 
 export default class Aggr {
   constructor(opts) {

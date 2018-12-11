@@ -1,16 +1,14 @@
 // https://connect.soundcloud.com/sdk/sdk-3.3.1.js
 
 import GetFeed from '../utils/service'
+import soundcloudConfig from '../assets/conf/soundcloud'
 
-const soundcloudConfig = new GetFeed('soundcloudConfig', '../assets/conf/soundcloud.json').getFeed()
+// const soundcloudConfig = new GetFeed('soundcloudConfig', '../assets/conf/soundcloud.json').getFeed()
 
-const soundcloudFeed = soundcloudConfig
-  .then(data => {
-    return new GetFeed('soundcloudFeed',
-    `https://api.soundcloud.com/tracks?q=byutifu&order=created_at&format=json&client_id=${data.client_id}`)
-      .getFeed()
-
-  }).then(data => {
+// const data = soundcloudConfig
+const soundcloudFeed = new GetFeed('soundcloudFeed',
+`https://api.soundcloud.com/tracks?q=byutifu&order=created_at&format=json&client_id=${soundcloudConfig.client_id}`)
+  .getFeed().then(data => {
     let i = 0;
     let normalizedOutput = []
     let date = ''
