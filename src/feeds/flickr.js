@@ -1,15 +1,11 @@
 import GetFeed from '../utils/service'
+import flickrConfig from '../assets/conf/flickr'
 
-const flickrConfig = new GetFeed('flickrConfig', '../assets/conf/flickr.json').getFeed()
-const flickrFeed = flickrConfig
-  .then(data => {
-    // TODO modernized string template
-    return new GetFeed('flickrData', 'https://api.flickr.com/services/rest/?method=flickr.people.getPhotos&api_key=' +
-      data.access_token + '&user_id=' +
-      data.user.id + '&format=json' +
-      '&per_page=' + 10 +
-      '&page=1&extras=date_upload,last_update&nojsoncallback=1').getFeed()
-  }).then(data => {
+const flickrFeed = new GetFeed('flickrData', 'https://api.flickr.com/services/rest/?method=flickr.people.getPhotos&api_key=' +
+  flickrConfig.access_token + '&user_id=' +
+  flickrConfig.user.id + '&format=json' +
+  '&per_page=' + 10 +
+  '&page=1&extras=date_upload,last_update&nojsoncallback=1').getFeed().then(data => {
     let i = 0;
     let normalizedOutput = []
     let date = ''
