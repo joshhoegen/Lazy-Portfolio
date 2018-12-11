@@ -1,13 +1,10 @@
 import GetFeed from '../utils/service'
+import googleConfig from '../assets/conf/google'
 
-const googleConfig = new GetFeed('googleConfig', '../assets/conf/google.json').getFeed()
-const googleFeed = googleConfig
-  .then(data => {
-    return new GetFeed('googleData', 'https://www.googleapis.com/plus/v1/people/' +
-      data.id + '/activities/public?maxResults=' +
-      10 + '&key='+
-      data.key).getFeed()
-  }).then(data => {
+const googleFeed = new GetFeed('googleData', 'https://www.googleapis.com/plus/v1/people/' +
+  googleConfig.id + '/activities/public?maxResults=' +
+  10 + '&key='+
+  googleConfig.key).getFeed().then(data => {
     // Abstracting for potential DRYness between feeds
     let i = 0;
     let normalizedOutput = []

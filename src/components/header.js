@@ -2,6 +2,7 @@ import dom, {Fragment} from 'jsx-render'
 import JSXComponent from 'jsx-render/lib/JSXComponent'
 
 import Pages from './pages'
+
 class Header extends JSXComponent {
   menuClick() {
     const menu = document.querySelector('.pages')
@@ -16,7 +17,7 @@ class Header extends JSXComponent {
             <Pages />
           </ul>
         </div>
-        <img class="logo" src="/assets/images/jh-logo-80.png" alt="Josh Hoegen" />
+        <img class="logo" src="assets/images/jh-logo-80.png" alt="Josh Hoegen" />
         <h1>Josh Hoegen &raquo; )'( &raquo; &#9835; &raquo; &hearts; &raquo;</h1>
       </div>
     )

@@ -17,6 +17,7 @@
     "axios": "^0.18.0",
     "copy-webpack-plugin": "^4.6.0",
     "jsx-render": "^1.1.1",
+    "twit": "^2.2.11",
     "whatever-storage": "^1.1.1"
   },
   "devDependencies": {
