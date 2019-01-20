@@ -67,14 +67,16 @@ class Description extends JSXComponent {
   }
 }
 
-document.querySelector('body').prepend(
-  <Header />
-)
+export default Header
 
-feedAggr.aggrAll().then((feedItems) => {
-  feedItems.map((item, index) => {
-    document.querySelector('.aggr').appendChild(
-      <Feed {...item} ></Feed>
-    )
-  })
-})
+// document.querySelector('body').prepend(
+//   <Header />
+// )
+
+// feedAggr.aggrAll().then((feedItems) => {
+//   feedItems.map((item, index) => {
+//     document.querySelector('.aggr').appendChild(
+//       <Feed {...item} ></Feed>
+//     )
+//   })
+// })

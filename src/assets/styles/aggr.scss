@@ -12,7 +12,7 @@
 	margin-top: 20px;
 }
 
-.aggr li img {
+.aggr li img, .aggr li iframe {
 	width: 100%;
 	box-shadow: 1px 5px 22px #000;
 }
@@ -52,4 +52,8 @@
 
 .aggr .title-container {
   margin-bottom: 10px;
+}
+
+.aggr p {
+  color: #ccc;
 }
