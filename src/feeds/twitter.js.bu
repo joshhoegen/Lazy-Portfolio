@@ -11,12 +11,14 @@ import twitterConfig from '../assets/conf/twitter'
 //   timeout_ms:           10*1000,
 // })
 
-//statuses/user_timeline.json
+// statuses/user_timeline.json
 
-const twitterFeed = T.get('search/tweets', { q: 'banana since:2011-07-11', count: 100 }).getFeed().then(data => {
-// 'https://twitter.com/joshhoegen1').getFeed().then(data => {
+const twitterFeed = T.get('search/tweets', { q: 'banana since:2011-07-11', count: 100 })
+  .getFeed()
+  .then(data => {
+    // 'https://twitter.com/joshhoegen1').getFeed().then(data => {
     // Abstracting for potential DRYness between feeds
-    console.log(data);
+    console.log(data)
     // let i = 0;
     // let normalizedOutput = []
     // let date = ''
@@ -45,6 +47,5 @@ const twitterFeed = T.get('search/tweets', { q: 'banana since:2011-07-11', count
     //
     // return normalizedOutput
   })
-
 
 export default twitterFeed
