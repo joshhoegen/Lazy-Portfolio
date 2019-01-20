@@ -1,4 +1,4 @@
-import dom, {Fragment} from 'jsx-render'
+import dom from 'jsx-render'
 import JSXComponent from 'jsx-render/lib/JSXComponent'
 import Header from './components/header'
 
@@ -9,72 +9,60 @@ import './assets/styles/app.scss'
 const feedAggr = new Aggr()
 
 class Feed extends JSXComponent {
-  constructor(props) {
-    super(props)
-  }
-  render(props) {
+  render({ date, description, image_url, title, type }) {
     return (
-      <li class={`postLi ${props.type}`}>
-        <div class="title-container">
-          <Title {...{title: props.title}}/>
-          <h3 class="date">{new Date(props.date).toLocaleDateString('en-US')}</h3>
+      <li className={`postLi ${type}`}>
+        <div className="title-container">
+          <Title {...{ title }} />
+          <h3 className="date">{new Date(date).toLocaleDateString('en-US')}</h3>
         </div>
-        <Image {...{image_url: props.image_url, type: props.type}} />
-        <Description {...{description: props.description, type: props.type}} />
+        <Image {...{ image_url, type }} />
+        <Description {...{ description, type }} />
       </li>
     )
   }
 }
 
 class Title extends JSXComponent {
-  render(props) {
-    if (props.title) {
-      return (
-        <h3>{props.title}</h3>
-      )
+  render({ title }) {
+    if (title) {
+      return <h3>{title}</h3>
     }
-    return
+
+    return null
   }
 }
 
 class Image extends JSXComponent {
-  render(props) {
-    if (props.image_url && props.type !== 'widget') {
-      return (
-        <img src={props.image_url}></img>
-      )
+  render({ image_url, type }) {
+    if (image_url && type !== 'widget') {
+      return <img alt="null" src={image_url} />
     }
-    return
+
+    return null
   }
 }
 
 class Description extends JSXComponent {
-  render(props) {
-    if (props.description) {
-      if (props.type === 'text') {
+  render({ description, type }) {
+    if (description) {
+      if (type === 'text') {
         return (
           <div>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <h3 dangerouslySetInnerHTML={{ __html:props.description}}></h3>
+            <i className="fa fa-star" aria-hidden="true" />
+            <h3 dangerouslySetInnerHTML={{ __html: description }} />
           </div>
         )
       }
-      return (
-        <p dangerouslySetInnerHTML={{ __html:props.description}}></p>
-      )
+      return <p dangerouslySetInnerHTML={{ __html: description }} />
     }
-    return
+
+    return null
   }
 }
 
-document.querySelector('body').prepend(
-  <Header />
-)
+document.querySelector('body').prepend(<Header />)
 
-feedAggr.aggrAll().then((feedItems) => {
-  feedItems.map((item, index) => {
-    document.querySelector('.aggr').appendChild(
-      <Feed {...item} ></Feed>
-    )
-  })
+feedAggr.aggrAll().then(feedItems => {
+  feedItems.map(item => document.querySelector('.aggr').appendChild(<Feed {...item} />))
 })
