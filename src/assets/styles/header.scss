@@ -12,12 +12,32 @@
 
 #jh-header .menu-button {
   left: 20px;
-  top: 9px;
+  top: 14px;
   font-size: 20px;
   position: absolute;
   border: 0;
   padding: 6px;
   cursor: pointer;
+  color: #008FB0;
+  display: inline-block;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  background: none;
+}
+
+#jh-header .menu-button:hover,
+#jh-header .menu-button:focus {
+  background: none;
+}
+
+#jh-header .menu-button:focus {
+    outline: 0px;
+}
+
+#jh-header .menu-button:active {
+    transform: scale(0.99);
 }
 
 #jh-header ul.pages {

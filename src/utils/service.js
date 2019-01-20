@@ -3,25 +3,27 @@
 import axios from 'axios'
 import db from 'whatever-storage'
 
-const {CancelToken} = axios
-const source = CancelToken.source()
+const { CancelToken } = axios
 
 export default class GetFeed {
   constructor(feedName, url) {
-    const {CancelToken} = axios
     this.source = CancelToken.source()
     this.feedName = feedName
     this.url = url
     this.feedService = axios.create({
       cancelToken: this.source.token,
-      transformRequest: [(data, headers) => {
-        const sessionData = db.session.getItem(this.feedName)
-        if (sessionData) {
-          this.source.cancel(sessionData)
-        }
+      transformRequest: [
+        // (data, headers)
+        data => {
+          const sessionData = db.session.getItem(this.feedName)
 
-        return data
-      }]
+          if (sessionData) {
+            this.source.cancel(sessionData)
+          }
+
+          return data
+        },
+      ],
     })
   }
 
@@ -29,15 +31,13 @@ export default class GetFeed {
     const cancel = GetFeed.handleCancel
     const feedPromise = this.feedService
       .get(this.url)
-      .then(({ data }) => {
-        return this.setSessionStorage({ data })
-      })
+      .then(({ data }) => this.setSessionStorage({ data }))
       .catch(cancel)
 
     return feedPromise
   }
 
-  setSessionStorage({data}) {
+  setSessionStorage({ data }) {
     db.session.setItem(this.feedName, data)
     return data
   }
