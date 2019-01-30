@@ -4,7 +4,7 @@ import axios from 'axios'
 import flickrFeed from './flickr'
 import soundcloudFeed from './soundcloud'
 import twitter from './twitter'
-import google from './google'
+// import google from './google'
 
 export default class Aggr {
   constructor() {
@@ -16,7 +16,7 @@ export default class Aggr {
       if (response.length) {
         return response
       }
-      return Promise.all([google, twitter, flickrFeed, soundcloudFeed]).then(result => {
+      return Promise.all([twitter, flickrFeed, soundcloudFeed]).then(result => {
         const agr = [].concat(...result)
         // sort newest to oldest
         const json = agr.sort((a, b) => b.date.toString().localeCompare(a.date))

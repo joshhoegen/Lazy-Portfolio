@@ -1,4 +1,5 @@
 import GetFeed from '../utils/service'
+import makeTitle from '../utils/make-title'
 import flickrConfig from '../assets/conf/flickr'
 
 const location = window.location.origin;
@@ -12,20 +13,17 @@ const flickrFeed = new GetFeed(
     let i = 0
     const normalizedOutput = []
     let date = ''
-    const regex = /.*?(\.)(?=\s[A-Z])/;
 
     for (i; i < data.length; i += 1) {
       // SEE normalize() comment above for re-use in other feeds
       const d = data[i]
       let description = d.full_text
       let img = ''
-      let m
-      let title = ''
+      let title = makeTitle(description)
       let type = 'text'
 
-      if ((m = regex.exec(description)) !== null) {
-        title = `${m[0]}`
-        description = description.replace(m[0], '')
+      if (title !== null) {
+        description = description.replace(title, '')
       }
 
       if (d.entities.media) {

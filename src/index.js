@@ -13,7 +13,7 @@ class Feed extends JSXComponent {
     return (
       <li className={`postLi ${type}`}>
         <div className="title-container">
-          <Title {...{ title }} />
+          <Title {...{ title, type }} />
           <h3 className="date">{new Date(date).toLocaleDateString('en-US')}</h3>
         </div>
         <Image {...{ image_url, type }} />
@@ -24,7 +24,15 @@ class Feed extends JSXComponent {
 }
 
 class Title extends JSXComponent {
-  render({ title }) {
+  render({ title, type }) {
+    if (title && type === 'text') {
+      return (
+        <div>
+          <i className="fa fa-star" aria-hidden="true" />
+          <h3 dangerouslySetInnerHTML={{ __html: title }} />
+        </div>
+      )
+    }
     if (title) {
       return <h3>{title}</h3>
     }
@@ -47,9 +55,9 @@ class Description extends JSXComponent {
   render({ description, type }) {
     if (description) {
       if (type === 'text') {
+        // <i className="fa fa-star" aria-hidden="true" />
         return (
           <div>
-            <i className="fa fa-star" aria-hidden="true" />
             <h3 dangerouslySetInnerHTML={{ __html: description }} />
           </div>
         )
