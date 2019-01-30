@@ -39,6 +39,9 @@ const googleFeed = new GetFeed(
     }
 
     return normalizedOutput
+  }).catch( e => {
+    console.log(e)
+    return []
   })
 
 export default googleFeed
