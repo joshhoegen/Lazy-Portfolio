@@ -7,7 +7,7 @@ module.exports = merge(webpackConfig, {
 
     output: {
         pathinfo: true,
-        publicPath: '/',
+        publicPath: '/src',
         filename: '[name].js'
     },
 
