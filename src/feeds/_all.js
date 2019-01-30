@@ -12,8 +12,8 @@ export default class Aggr {
   }
   aggrAll() {
     return this.checkCache().then(response => {
-      if (response.data.length) {
-        return response.data;
+      if (response.length) {
+        return response;
       }
       return Promise.all([flickrFeed, soundcloudFeed]).then(result => {
         const agr = [].concat(...result)
@@ -28,9 +28,16 @@ export default class Aggr {
   }
   checkCache() {
     return axios({
-      method: 'get',
-      url: this.url
-    });
+        method: 'get',
+        url: this.url
+      }).then(response => {
+        console.log(response);
+        return response.data;
+      })
+      .catch(error => {
+        console.log(error.response.data);
+        return [];
+      });
   }
   // TODO: Make togelable when node server setup
   writeCache(json) {
