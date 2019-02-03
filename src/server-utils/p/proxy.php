@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-$file_name = '../aggr.json';
+$file_name = $_GET['name'] ? '../'.$_GET['name'].'-aggr.json' : '../aggr.json';
 $file      = file_get_contents($file_name);
 $date      = filemtime($file_name);
 function write_json($data)
