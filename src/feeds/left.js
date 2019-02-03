@@ -1,24 +1,25 @@
+// import googleFeed from './google'
 import axios from 'axios'
 
-export default class Aggr {
-  constructor(feeds, cacheName) {
-    const location = window.location.origin
+import github from './github'
 
-    this.feeds = feeds
-    this.url =  `${location}/server-utils/p/proxy.php?name=${cacheName}`
+export default class Aggr {
+  constructor() {
+    const location = window.location.origin
   }
+
   aggrAll() {
     return this.checkCache().then(response => {
       if (response.length) {
         return response
       }
-      return Promise.all(this.feeds).then(result => {
+      return Promise.all([github]).then(result => {
         const agr = [].concat(...result)
         // sort newest to oldest
-        const json = agr.sort((a, b) => b.date.toString().localeCompare(a.date))
+        // const json = agr.sort((a, b) => b.date.toString().localeCompare(a.date))
 
-        this.writeCache(json)
-        return json
+        this.writeCache(agr)
+        return agr
       })
     })
   }
