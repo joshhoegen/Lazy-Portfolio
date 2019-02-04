@@ -1,5 +1,5 @@
 function makeTitle(str) {
-  const regex = /.*?(\.)(?=\s[A-Z])/;
+  const regex = /.*?(\.)(?=\s[A-Z])/
   const m = regex.exec(str)
   let title = null
 
