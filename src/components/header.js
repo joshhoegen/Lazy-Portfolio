@@ -21,7 +21,7 @@ class Header extends JSXComponent {
             <Pages />
           </ul>
         </div>
-        <img className="logo" src="assets/images/jh-logo-80.png" alt="Josh Hoegen" />
+        <img className="logo" src="assets/images/jh-logo-80.png" alt="" />
         <h1>Josh Hoegen &raquo; )'( &raquo; &#9835; &raquo; &hearts; &raquo;</h1>
       </div>
     )

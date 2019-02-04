@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default class Aggr {
-  constructor(feeds, cacheName) {
+  constructor(feeds, cacheName = 'default') {
     const location = window.location.origin
 
     this.feeds = feeds

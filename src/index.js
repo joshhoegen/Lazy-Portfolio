@@ -1,18 +1,19 @@
 import dom from 'jsx-render'
 import JSXComponent from 'jsx-render/lib/JSXComponent'
 import Header from './components/header'
+import GithubFeed from './components/github'
 
 import Aggr from './feeds/_all'
 // TODO set as const
 import flickrFeed from './feeds/flickr'
 import soundcloudFeed from './feeds/soundcloud'
 import twitter from './feeds/twitter'
-// import github from './feeds/github'
+import github from './feeds/github'
 
 import './assets/styles/app.scss'
 
 const feedAggr = new Aggr([twitter, flickrFeed, soundcloudFeed])
-// const feedaggrRight = new Aggr([github], false)
+const feedaggrRight = new Aggr([github], 'github')
 
 class Feed extends JSXComponent {
   render({ date, description, image_url, title, type }) {
@@ -29,20 +30,33 @@ class Feed extends JSXComponent {
   }
 }
 
-class FeedLeft extends JSXComponent {
-  render({ date, description, embed_url, title, type }) {
-    return (
-      <li className={`postLiRight ${type}`}>
-        <a href={embed_url} className="title-container">
-          <i className="fa fa-star" aria-hidden="true" />
-          <span dangerouslySetInnerHTML={{ __html: title }} />|
-          <span dangerouslySetInnerHTML={{ __html: description }} />|
-          <span className="date">{new Date(date).toLocaleDateString('en-US')}</span>
-        </a>
-      </li>
-    )
-  }
-}
+// class FeedLeftBody extends JSXComponent {
+//   render({ date, description, embed_url, title, type }) {
+//     return (
+//       <li className={`postLiRight ${type}`}>
+//         <a href={embed_url} className="title-container">
+//           <i className="fa fa-star" aria-hidden="true" />
+//           <span dangerouslySetInnerHTML={{ __html: title }} />|
+//           <span dangerouslySetInnerHTML={{ __html: description }} />|
+//           <span className="date">{new Date(date).toLocaleDateString('en-US')}</span>
+//         </a>
+//       </li>
+//     )
+//   }
+// }
+//
+// class FeedLeftHeadline extends JSXComponent {
+//   static drawerButtonClick() {
+//     const container = document.querySelector('.drawer-container')
+//     container.classList.toggle('show')
+//   }
+//
+//   render() {
+//     return (
+//       <h2 className="drawer-headline"><i className="fa fa-github" aria-hidden="true" /> Recent Github Activity</h2>
+//     )
+//   }
+// }
 
 class Title extends JSXComponent {
   render({ title, type }) {
@@ -76,7 +90,6 @@ class Description extends JSXComponent {
   render({ description, type }) {
     if (description) {
       if (type === 'text') {
-        // <i className="fa fa-star" aria-hidden="true" />
         return (
           <div>
             <h3 dangerouslySetInnerHTML={{ __html: description }} />
@@ -96,6 +109,10 @@ feedAggr.aggrAll().then(feedItems => {
   feedItems.map(item => document.querySelector('.aggr').appendChild(<Feed {...item} />))
 })
 
-// feedaggrRight.aggrAll().then(feedItems => {
-//   feedItems.map(item => document.querySelector('.aggrRight').appendChild(<FeedLeft {...item} />))
-// })
+feedaggrRight.aggrAll().then(feedItems => {
+  if (Array.isArray(feedItems) && feedItems.length) {
+    document.querySelector('.drawer').appendChild(<GithubFeed feedItems={feedItems} />)
+    // document.querySelector('.drawer-container').prepend(<FeedLeftHeadline />)
+    // feedItems.map(item => document.querySelector('.aggrRight').appendChild(<FeedLeftBody {...item} />))
+  }
+})
