@@ -30,34 +30,6 @@ class Feed extends JSXComponent {
   }
 }
 
-// class FeedLeftBody extends JSXComponent {
-//   render({ date, description, embed_url, title, type }) {
-//     return (
-//       <li className={`postLiRight ${type}`}>
-//         <a href={embed_url} className="title-container">
-//           <i className="fa fa-star" aria-hidden="true" />
-//           <span dangerouslySetInnerHTML={{ __html: title }} />|
-//           <span dangerouslySetInnerHTML={{ __html: description }} />|
-//           <span className="date">{new Date(date).toLocaleDateString('en-US')}</span>
-//         </a>
-//       </li>
-//     )
-//   }
-// }
-//
-// class FeedLeftHeadline extends JSXComponent {
-//   static drawerButtonClick() {
-//     const container = document.querySelector('.drawer-container')
-//     container.classList.toggle('show')
-//   }
-//
-//   render() {
-//     return (
-//       <h2 className="drawer-headline"><i className="fa fa-github" aria-hidden="true" /> Recent Github Activity</h2>
-//     )
-//   }
-// }
-
 class Title extends JSXComponent {
   render({ title, type }) {
     if (title && type === 'text') {
@@ -112,7 +84,5 @@ feedAggr.aggrAll().then(feedItems => {
 feedaggrRight.aggrAll().then(feedItems => {
   if (Array.isArray(feedItems) && feedItems.length) {
     document.querySelector('.drawer').appendChild(<GithubFeed feedItems={feedItems} />)
-    // document.querySelector('.drawer-container').prepend(<FeedLeftHeadline />)
-    // feedItems.map(item => document.querySelector('.aggrRight').appendChild(<FeedLeftBody {...item} />))
   }
 })

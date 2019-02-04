@@ -5,8 +5,9 @@ export default class Aggr {
     const location = window.location.origin
 
     this.feeds = feeds
-    this.url =  `${location}/server-utils/p/proxy.php?name=${cacheName}`
+    this.url = `${location}/server-utils/p/proxy.php?name=${cacheName}`
   }
+
   aggrAll() {
     return this.checkCache().then(response => {
       if (response.length) {
@@ -22,24 +23,25 @@ export default class Aggr {
       })
     })
   }
+
   checkCache() {
     return axios({
-        method: 'get',
-        url: this.url
-      }).then(response => {
-        return response.data
-      })
+      method: 'get',
+      url: this.url,
+    })
+      .then(response => response.data)
       .catch(error => {
         console.log(error.response.data)
         return []
       })
   }
+
   // TODO: Make togelable when node server setup
   writeCache(json) {
     axios({
       method: 'post',
       url: this.url,
-      data: json
+      data: json,
     })
   }
 }

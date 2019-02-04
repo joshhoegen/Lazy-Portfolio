@@ -1,13 +1,9 @@
 import GetFeed from '../utils/service'
 import makeTitle from '../utils/make-title'
-import flickrConfig from '../assets/conf/flickr'
 
-const location = window.location.origin;
+const location = window.location.origin
 
-const flickrFeed = new GetFeed(
-  'twitterData',
-  `${location}/server-utils/p/twitter.php`,
-)
+const flickrFeed = new GetFeed('twitterData', `${location}/server-utils/p/twitter.php`)
   .getFeed()
   .then(data => {
     let i = 0
@@ -19,7 +15,7 @@ const flickrFeed = new GetFeed(
       const d = data[i]
       let description = d.full_text
       let img = ''
-      let title = makeTitle(description)
+      const title = makeTitle(description)
       let type = 'text'
 
       if (title !== null) {
@@ -33,18 +29,19 @@ const flickrFeed = new GetFeed(
 
       date = new Date(d.created_at).getTime()
       normalizedOutput.push({
-        title: title,
+        title,
         date,
         embed_url: '',
-        type: type,
+        type,
         site_url: d.expanded_url,
         image_url: img,
-        description: description,
+        description,
       })
     }
 
     return normalizedOutput
-  }).catch( e => {
+  })
+  .catch(e => {
     console.log(e)
     return []
   })

@@ -1,12 +1,11 @@
 import GetFeed from '../utils/service'
-import makeTitle from '../utils/make-title'
 import githubConfig from '../assets/conf/github'
-
-const location = window.location.origin;
 
 const flickrFeed = new GetFeed(
   'githubData',
-  `https://api.github.com/users/${githubConfig.user.username}/events?type=owner&per_page=30&sort=created&direction=desc?page=1`,
+  `https://api.github.com/users/${
+    githubConfig.user.username
+  }/events?type=owner&per_page=30&sort=created&direction=desc?page=1`,
 )
   .getFeed()
   .then(data => {
@@ -18,7 +17,7 @@ const flickrFeed = new GetFeed(
     for (i; i < data.length; i += 1) {
       const d = data[i]
       // Believe it or not the fastest: https://stackoverflow.com/questions/2631001/test-for-existence-of-nested-javascript-object-key
-      const message = (((d.payload || {}).commits || [])[0] || {}).message || ''; //d.payload.commits[0].message
+      const message = (((d.payload || {}).commits || [])[0] || {}).message || '' // d.payload.commits[0].message
 
       if (filter.includes(d.type)) {
         // SEE normalize() comment above for re-use in other feeds
@@ -36,7 +35,8 @@ const flickrFeed = new GetFeed(
     }
 
     return normalizedOutput
-  }).catch( e => {
+  })
+  .catch(e => {
     console.log(e)
     return []
   })
