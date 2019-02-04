@@ -1,6 +1,7 @@
 import dom from 'jsx-render'
 import JSXComponent from 'jsx-render/lib/JSXComponent'
 
+/* eslint-disable react/no-danger */
 class FeedLeftBody extends JSXComponent {
   render({ date, description, embed_url, title, type }) {
     return (
@@ -19,21 +20,16 @@ class FeedLeftBody extends JSXComponent {
 class FeedLeftHeadline extends JSXComponent {
   render() {
     return (
-      <h2 className="drawer-headline"><i className="fa fa-github" aria-hidden="true" /> Recent Github Activity</h2>
+      <h2 className="drawer-headline">
+        <i className="fa fa-github" aria-hidden="true" /> Recent Github Activity
+      </h2>
     )
   }
 }
 
 class GithubFeed extends JSXComponent {
-  // constructor(props) {
-  //   console.log(props);
-  //   // this.feed = props.feedItems
-  // }
-
   static drawerButtonClick(e) {
-    console.log(e);
-    console.log(document.querySelector('.drawer-container'));
-    const container = document.querySelector('.drawer-container')
+    const container = document.querySelector('.drawer-wrapper')
     const aggrContainer = document.querySelector('.view-container')
 
     e.target.classList.toggle('draw-margin')
@@ -43,14 +39,16 @@ class GithubFeed extends JSXComponent {
 
   render(props) {
     return (
-      <div>
+      <div className="drawer-wrapper">
         <button className="drawer-button" ref={super.ref} onClick={GithubFeed.drawerButtonClick}>
           <i className="fa fa-github" />
         </button>
-        <div class="drawer-container">
+        <div className="drawer-container">
           <FeedLeftHeadline />
-          <ul class="aggrRight">
-            { Object.keys(props.feedItems).map(key => <FeedLeftBody {...props.feedItems[key]} />) }
+          <ul className="aggrRight">
+            {Object.keys(props.feedItems).map(key => (
+              <FeedLeftBody {...props.feedItems[key]} />
+            ))}
           </ul>
         </div>
       </div>
