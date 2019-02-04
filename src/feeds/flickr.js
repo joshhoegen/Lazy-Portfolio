@@ -33,7 +33,8 @@ const flickrFeed = new GetFeed(
     }
 
     return normalizedOutput
-  }).catch( e => {
+  })
+  .catch(e => {
     console.log(e)
     return []
   })

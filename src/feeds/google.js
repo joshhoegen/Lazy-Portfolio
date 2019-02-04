@@ -18,7 +18,7 @@ const googleFeed = new GetFeed(
     for (i; i < data.items.length; i += 1) {
       const item = data.items[i]
       let description = item.object.content
-      let title = makeTitle(description)
+      const title = makeTitle(description)
 
       // SEE normalize() comment above for re-use in other feeds
       date = new Date(item.published).getTime()
@@ -35,18 +35,19 @@ const googleFeed = new GetFeed(
       }
 
       normalizedOutput.push({
-        title: title,
+        title,
         date,
         embed_url: '',
         type: 'text',
         site_url: item.url,
         image_url: img,
-        description: description,
+        description,
       })
     }
 
     return normalizedOutput
-  }).catch( e => {
+  })
+  .catch(e => {
     console.log(e)
     return []
   })

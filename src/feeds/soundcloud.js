@@ -47,7 +47,8 @@ const soundcloudFeed = new GetFeed(
     }
 
     return normalizedOutput
-  }).catch( e => {
+  })
+  .catch(e => {
     console.log(e)
     return []
   })
