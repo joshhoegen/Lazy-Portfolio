@@ -29,7 +29,7 @@
 }
 
 .drawer-headline {
-  margin: 10px;
+  margin: 19px 10px;
 }
 
 .drawer-button {
@@ -65,9 +65,15 @@
   height: 300px;
   padding: 20px;
   transition: top 600ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
-  overflow: scroll;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
   box-sizing: border-box;
   scroll-behavior: auto;
+}
+
+.drawer-container::-webkit-scrollbar { /* WebKit */
+    width: 0px;
 }
 
 .drawer-wrapper {
