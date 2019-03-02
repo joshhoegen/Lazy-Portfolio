@@ -18,6 +18,7 @@ const flickrFeed = new GetFeed(
       const d = data[i]
       // Believe it or not the fastest: https://stackoverflow.com/questions/2631001/test-for-existence-of-nested-javascript-object-key
       const message = (((d.payload || {}).commits || [])[0] || {}).message || '' // d.payload.commits[0].message
+      const desc = message !== '' ? `${d.type} - ${message}` : d.type
 
       if (filter.includes(d.type)) {
         // SEE normalize() comment above for re-use in other feeds
@@ -29,7 +30,7 @@ const flickrFeed = new GetFeed(
           type: 'text',
           site_url: d.expanded_url,
           image_url: d.actor.avatar_url,
-          description: `${d.type} - ${message}`,
+          description: desc,
         })
       }
     }
