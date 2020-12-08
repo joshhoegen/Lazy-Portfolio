@@ -16,15 +16,15 @@ const feedAggr = new Aggr([twitter, flickrFeed, soundcloudFeed])
 const feedaggrRight = new Aggr([github], 'github')
 
 class Feed extends JSXComponent {
-  render({ date, description, image_url, title, type }) {
+  render({ date, description, image_url, site_url, title, type }) {
     return (
       <li className={`postLi ${type}`}>
         <div className="title-container">
           <Title {...{ title, type }} />
           <h3 className="date">{new Date(date).toLocaleDateString('en-US')}</h3>
         </div>
-        <Image {...{ image_url, type }} />
-        <Description {...{ description, type }} />
+        <Image {...{ image_url, type, site_url }} />
+        <Description {...{ description, type, site_url }} />
       </li>
     )
   }
@@ -49,9 +49,25 @@ class Title extends JSXComponent {
 }
 
 class Image extends JSXComponent {
-  render({ image_url, type }) {
+  render(data) {
+    const { site_url, image_url, type } = data
+
     if (image_url && type !== 'widget') {
-      return <img alt="null" src={image_url} />
+      return (
+        <div>
+          <img alt="null" src={image_url} />
+          <div className="social-link">
+            <a
+              href={site_url}
+              target="_blank"
+              rel="noreferrer"
+              title="See Josh Hoegen's art on social media!"
+            >
+              View on Flickr
+            </a>
+          </div>
+        </div>
+      )
     }
 
     return null
@@ -59,12 +75,19 @@ class Image extends JSXComponent {
 }
 
 class Description extends JSXComponent {
-  render({ description, type }) {
+  render(data) {
+    const { description, type, site_url } = data
+
     if (description) {
       if (type === 'text') {
         return (
           <div>
             <h3 dangerouslySetInnerHTML={{ __html: description }} />
+            <div className="social-link">
+              <a href={site_url} target="_blank" rel="noreferrer" title="View this tweet">
+                View on Twitter
+              </a>
+            </div>
           </div>
         )
       }
