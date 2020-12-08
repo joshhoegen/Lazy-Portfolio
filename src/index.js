@@ -10,6 +10,8 @@ import soundcloudFeed from './feeds/soundcloud'
 import twitter from './feeds/twitter'
 import github from './feeds/github'
 
+import linkify from './utils/linkify'
+
 import './assets/styles/app.scss'
 
 const feedAggr = new Aggr([twitter, flickrFeed, soundcloudFeed])
@@ -51,6 +53,7 @@ class Title extends JSXComponent {
 class Image extends JSXComponent {
   render(data) {
     const { site_url, image_url, type } = data
+    const platform = site_url.includes('twitter.com') ? 'Twitter' : 'Flickr'
 
     if (image_url && type !== 'widget') {
       return (
@@ -63,7 +66,7 @@ class Image extends JSXComponent {
               rel="noreferrer"
               title="See Josh Hoegen's art on social media!"
             >
-              View on Flickr
+              View on {platform}
             </a>
           </div>
         </div>
@@ -78,11 +81,13 @@ class Description extends JSXComponent {
   render(data) {
     const { description, type, site_url } = data
 
+    const descriptionWithLinks = linkify(description)
+
     if (description) {
       if (type === 'text') {
         return (
           <div>
-            <h3 dangerouslySetInnerHTML={{ __html: description }} />
+            <h3 dangerouslySetInnerHTML={{ __html: descriptionWithLinks }} />
             <div className="social-link">
               <a href={site_url} target="_blank" rel="noreferrer" title="View this tweet">
                 View on Twitter
