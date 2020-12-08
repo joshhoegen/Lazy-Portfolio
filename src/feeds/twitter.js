@@ -38,7 +38,7 @@ const flickrFeed = new GetFeed('twitterData', `${location}/server-utils/p/twitte
         date,
         embed_url: '',
         type,
-        site_url: `https://twitter.com/${d.user.screen_name}/status/${d.id}`,
+        site_url: `https://twitter.com/${d.user.screen_name}/status/${d.id_str}`,
         image_url: img,
         description,
       })
