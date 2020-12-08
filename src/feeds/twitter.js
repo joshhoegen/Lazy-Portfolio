@@ -8,14 +8,18 @@ const flickrFeed = new GetFeed('twitterData', `${location}/server-utils/p/twitte
   .then(data => {
     let i = 0
     const normalizedOutput = []
+
     let date = ''
 
     for (i; i < data.length; i += 1) {
       // SEE normalize() comment above for re-use in other feeds
       const d = data[i]
+
       let description = d.full_text
+
       let img = ''
       const title = makeTitle(description)
+
       let type = 'text'
 
       if (title !== null) {
@@ -28,12 +32,13 @@ const flickrFeed = new GetFeed('twitterData', `${location}/server-utils/p/twitte
       }
 
       date = new Date(d.created_at).getTime()
+
       normalizedOutput.push({
         title,
         date,
         embed_url: '',
         type,
-        site_url: d.expanded_url,
+        site_url: `https://twitter.com/${d.user.screen_name}/status/${d.id}`,
         image_url: img,
         description,
       })
