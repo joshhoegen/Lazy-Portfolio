@@ -33,6 +33,12 @@ const flickrFeed = new GetFeed('twitterData', `${location}/server-utils/p/twitte
 
       date = new Date(d.created_at).getTime()
 
+      const urls = d.entities.urls || []
+
+      urls.forEach(e => {
+        description = description.replace(e.url, e.expanded_url)
+      })
+
       normalizedOutput.push({
         title,
         date,
