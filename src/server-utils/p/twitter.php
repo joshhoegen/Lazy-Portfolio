@@ -13,7 +13,7 @@ $url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
 
 $requestMethod = "GET";
 
-$getfield = '?screen_name=joshhoegen1&count=10&tweet_mode=extended';
+$getfield = '?screen_name=josh_hoegen&count=10&tweet_mode=extended';
 
 $twitter = new TwitterAPIExchange($settings);
 
