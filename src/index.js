@@ -6,7 +6,7 @@ import GithubFeed from './components/github'
 import Aggr from './feeds/_all'
 // TODO set as const
 import flickrFeed from './feeds/flickr'
-import soundcloudFeed from './feeds/soundcloud'
+// import soundcloudFeed from "./feeds/soundcloud";
 import twitter from './feeds/twitter'
 import github from './feeds/github'
 
@@ -14,7 +14,7 @@ import linkify from './utils/linkify'
 
 import './assets/styles/app.scss'
 
-const feedAggr = new Aggr([twitter, flickrFeed, soundcloudFeed])
+const feedAggr = new Aggr([twitter, flickrFeed]) // soundcloudFeed
 const feedaggrRight = new Aggr([github], 'github')
 
 class Feed extends JSXComponent {
@@ -105,11 +105,11 @@ class Description extends JSXComponent {
 
 document.querySelector('body').prepend(<Header />)
 
-feedAggr.aggrAll().then(feedItems => {
-  feedItems.map(item => document.querySelector('.aggr').appendChild(<Feed {...item} />))
+feedAggr.aggrAll().then((feedItems) => {
+  feedItems.map((item) => document.querySelector('.aggr').appendChild(<Feed {...item} />))
 })
 
-feedaggrRight.aggrAll().then(feedItems => {
+feedaggrRight.aggrAll().then((feedItems) => {
   if (Array.isArray(feedItems) && feedItems.length) {
     document.querySelector('.drawer').appendChild(<GithubFeed feedItems={feedItems} />)
   }
