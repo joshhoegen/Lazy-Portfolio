@@ -31,10 +31,12 @@ class GithubFeed extends JSXComponent {
   static drawerButtonClick(e) {
     const container = document.querySelector('.drawer-wrapper')
     const aggrContainer = document.querySelector('.view-container')
+    const menuContainer = document.querySelector('.pages')
 
     e.target.classList.toggle('draw-margin')
     container.classList.toggle('show')
     aggrContainer.classList.toggle('drawer-margin')
+    menuContainer.classList.toggle('drawer-margin')
   }
 
   render(props) {
