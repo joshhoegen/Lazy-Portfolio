@@ -1,111 +1,39 @@
-const path = require('path');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-// Is the current build a development build
-const IS_DEV = (process.env.NODE_ENV === 'dev');
-
-const dirNode = 'node_modules';
-const dirApp = path.join(__dirname, 'src');
-const dirAssets = path.join(__dirname, 'src/assets');
-
-const appHtmlTitle = 'Josh Hoegen';
-
-/**
- * Webpack Configuration
- */
 module.exports = {
-  entry: {
-    vendor: [
-      'lodash'
-    ],
-    bundle: path.join(dirApp, 'index')
+  // Where files should be sent once they are bundled
+  output: {
+    path: path.join(__dirname, "/dist"),
+    filename: "index.bundle.js",
   },
-  resolve: {
-    modules: [
-      dirNode,
-      dirApp,
-      dirAssets
-    ]
+  // webpack 5 comes with devServer which loads in development mode
+  devServer: {
+    port: 3000,
+    // watchContentBase: true,
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      IS_DEV: IS_DEV
-    }),
-
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'src/index.ejs'),
-      title: appHtmlTitle
-    }),
-
-    new CopyWebpackPlugin([
-      {from:'src/assets',to:'assets'},
-      {from:'src/server-utils',to:'server-utils'}
-    ])
-  ],
+  // Rules of how webpack will take our files, complie & bundle them for the browser
   module: {
     rules: [
-      // BABEL
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /(node_modules)/,
-        options: {
-          compact: true
-        }
+        test: /\.(js|jsx)$/,
+        exclude: /nodeModules/,
+        use: {
+          loader: "babel-loader",
+        },
       },
-
-      // STYLES
       {
-        test: /\.css$/,
+        test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: IS_DEV
-            }
-          },
-        ]
+          // Creates `style` nodes from JS strings
+          "style-loader",
+          // Translates CSS into CommonJS
+          "css-loader",
+          // Compiles Sass to CSS
+          "sass-loader",
+        ],
       },
-
-      // CSS / SASS
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: "style-loader" // creates style nodes from JS strings
-          },
-          {
-            loader: "css-loader" // translates CSS into CommonJS
-          },
-          {
-            loader: "sass-loader" // compiles Sass to CSS
-          }
-        ]
-      },
-
-      // IMAGES
-      {
-        test: /\.(jpe?g|png|gif)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[ext]'
-        }
-      },
-
-      // fonts
-      {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'fonts/'
-          }
-        }]
-      }
-    ]
-  }
+    ],
+  },
+  plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
 };

@@ -90,6 +90,16 @@
   z-index: 2;
 }*/
 
+#jh-nav .pages {
+  transition: top 600ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+
+}
+
+#jh-nav .pages.drawer-margin {
+  top: 345px;
+  transition: top 600ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
+}
+
 .drawer-wrapper.show .drawer-container {
   top: 0;
   left: 0;
