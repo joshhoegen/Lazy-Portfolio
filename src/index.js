@@ -105,11 +105,16 @@ class Description extends JSXComponent {
 
 document.querySelector('body').prepend(<Header />)
 
-feedAggr.aggrAll().then((feedItems) => {
-  feedItems.map((item) => document.querySelector('.aggr').appendChild(<Feed {...item} />))
-})
+feedAggr
+  .aggrAll()
+  .then(feedItems => {
+    feedItems.map(item => document.querySelector('.aggr').appendChild(<Feed {...item} />))
+  })
+  .finally(() => {
+    document.querySelector('.loader').classList.add('hidden')
+  })
 
-feedaggrRight.aggrAll().then((feedItems) => {
+feedaggrRight.aggrAll().then(feedItems => {
   if (Array.isArray(feedItems) && feedItems.length) {
     document.querySelector('.drawer').appendChild(<GithubFeed feedItems={feedItems} />)
   }
