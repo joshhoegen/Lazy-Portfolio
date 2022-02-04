@@ -1,11 +1,12 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   // Where files should be sent once they are bundled
   output: {
-    path: path.join(__dirname, "/dist"),
-    filename: "index.bundle.js",
+    path: path.join(__dirname, '/dist'),
+    filename: 'index.bundle.js',
   },
   // webpack 5 comes with devServer which loads in development mode
   devServer: {
@@ -19,21 +20,35 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /nodeModules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
         },
       },
       {
         test: /\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
-          "style-loader",
+          'style-loader',
           // Translates CSS into CommonJS
-          "css-loader",
+          'css-loader',
           // Compiles Sass to CSS
-          "sass-loader",
+          'sass-loader',
         ],
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
-};
+  plugins: [
+    new HtmlWebpackPlugin({ template: './src/index.html' }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: 'src/assets',
+          to: 'assets',
+        },
+        {
+          from: 'src/server-utils',
+          to: 'server-utils',
+        },
+      ],
+    }),
+  ],
+}
