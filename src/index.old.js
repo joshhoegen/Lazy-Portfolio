@@ -1,10 +1,3 @@
-function isImageURL(url) {
-  const imageExtensions = /\.(jpeg|jpg|gif|png|svg)$/i
-  return imageExtensions.test(url)
-}
-
-const asset = 'assets/images/lovers.png'
-
 // Create a canvas element
 const canvas = document.createElement('canvas')
 document.body.appendChild(canvas)
@@ -19,7 +12,7 @@ canvas.width = window.innerWidth
 
 // Load the image
 const image = new Image()
-image.src = asset
+image.src = 'assets/images/jh-logo-150.png'
 image.onload = () => {
   // Calculate the corresponding canvas height to maintain the image aspect ratio
   const aspectRatio = image.width / image.height
@@ -40,7 +33,7 @@ image.onload = () => {
       step: 0.1,
     },
     numLayers: {
-      value: 5,
+      value: 1,
       range: [1, 10],
       step: 1,
     },
@@ -48,18 +41,6 @@ image.onload = () => {
       value: 10,
       range: [1, 10],
       step: 1,
-    },
-    // // Adjust this value to change the tightness of the spiral
-    angleAdjust: {
-      value: 0.3,
-      range: [0, 2],
-      step: 0.01,
-    },
-    // Adjust this value to change the growth rate of the spiral
-    radiusAdjust: {
-      value: 1.04,
-      range: [1.04, 1.16],
-      step: 0.04,
     },
   }
 
@@ -74,15 +55,14 @@ image.onload = () => {
     controlContainer.appendChild(slider)
 
     slider.addEventListener('input', (event) => {
-      console.log('DRAW', event.target.value)
+      console.log('DRAW', value)
       initialControls[type].value = parseFloat(event.target.value)
       drawSpiral(initialControls)
     })
   }
 
   const drawSpiral = (controls = initialControls) => {
-    const { numLayers, layerSpacing, imageSize, radiusAdjust, angleAdjust } = controls
-    console.log(radiusAdjust.value)
+    const { numLayers, layerSpacing, imageSize } = controls
     // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     // Set the starting point for the spiral
@@ -113,9 +93,12 @@ image.onload = () => {
         // ctx.globalAlpha = 1 // Adjust this value to change the opacity of the layered effect
         ctx.drawImage(image, x - scaledWidth / 2, y - scaledHeight / 2, scaledWidth, scaledHeight)
 
+        // Reset the global alpha value
+        // ctx.globalAlpha = 1
+
         // Update the angle for the next spiral point
-        angle += angleAdjust.value // 0.3
-        radius *= radiusAdjust.value
+        angle += 0.3 // Adjust this value to change the tightness of the spiral
+        radius *= 1.04 // Adjust this value to change the growth rate of the spiral
       }
     }
   }
@@ -144,33 +127,10 @@ image.onload = () => {
     })
   }
 
-  // Function to create the export button and handle its click event
-  const createImageField = () => {
-    const textField = document.createElement('input')
-    textField.type = 'text'
-    textField.style.position = 'absolute'
-    textField.style.zIndex = 2
-
-    document.body.appendChild(textField)
-
-    textField.addEventListener('input', (event) => {
-      const val = event.target.value
-      if (!isImageURL(val)) {
-        return
-      }
-
-      image.src = val
-      imageElement.src = val
-      drawSpiral(initialControls)
-    })
-  }
-
   // Call the functions to create the slider and export button
   // createSlider()
   // createLayerSlider()
   // createSpacingSlider()
-  createImageField()
-
   createExportButton()
   for (const prop in initialControls) {
     const input = initialControls[prop]
@@ -190,15 +150,15 @@ image.onload = () => {
 
 // Create a new image element
 const imageElement = document.createElement('img')
-imageElement.src = asset
+imageElement.src = 'assets/images/jh-logo-150.png'
 
 // Set the position and size of the image using CSS
 imageElement.style.position = 'absolute'
 imageElement.style.left = '50%'
 imageElement.style.top = '50%'
 imageElement.style.transform = 'translate(-50%, -50%)'
-// imageElement.style.width = '200px' // Adjust the width as needed
-// imageElement.style.height = '200px' // Adjust the height as needed
+imageElement.style.width = '200px' // Adjust the width as needed
+imageElement.style.height = '200px' // Adjust the height as needed
 
 // Append the image element to the document body
 document.body.appendChild(imageElement)
