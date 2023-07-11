@@ -1,0 +1,146 @@
+body {
+  padding: 0;
+  margin: 0 auto;
+  width: auto;
+  font:
+    14px 'Lucida Grande',
+    Helvetica,
+    Arial,
+    sans-serif;
+  background: #333;
+  color: #fff;
+  text-shadow: 2px 1px 6px #000;
+  background-image: url(../images/bg-texture.png);
+  background-image: url(../images/bg-texture.png), linear-gradient(to bottom, #333, #252525);
+  /*    animation: animatedBackground 400s linear infinite;
+    -ms-animation: animatedBackground 400s linear infinite;
+    -moz-animation: animatedBackground 400s linear infinite;
+    -webkit-animation: animatedBackground 400s linear infinite;*/
+}
+@keyframes animatedBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+@-webkit-keyframes animatedBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+@-ms-keyframes animatedBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+@-moz-keyframes animatedBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 0;
+  }
+}
+
+img.logo {
+  width: 30px;
+  margin: 0 20px 0 0;
+  position: relative;
+  display: inline-block;
+  top: 6px;
+}
+h1 {
+  margin: 10px 0 10px 0;
+  display: inline-block;
+}
+h2 {
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  color: #ccc;
+}
+h3 {
+  color: #ccc;
+  margin: 0px 0px;
+  font:
+    normal 16px/24px 'Open Sans',
+    Arial,
+    Helvetica,
+    sans-serif;
+  text-shadow: 2px 12px 14px #000;
+}
+a {
+  color: #008fb0;
+}
+.floatLeft {
+  float: left;
+}
+#jh-page {
+  background: linear-gradient(#3330, #0009) no-repeat;
+  width: 70%;
+  margin: 153px 50%;
+  padding: 0;
+  position: absolute;
+  transform: translate(-50%, -53px);
+}
+.instagram {
+  position: absolute;
+  top: 0px;
+  text-align: center;
+  z-index: -1;
+}
+.instagram img.mini {
+  width: 10px;
+}
+
+@media (max-width: 1000px) {
+  #jh-page {
+    width: 62%;
+  }
+  ul.pages {
+    width: 18%;
+  }
+}
+
+.view-frame {
+  /* width: 100%;
+  height: 100%;
+  object-fit: cover; */
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.loader {
+  margin: 50% 50%;
+  height: 50px;
+  stroke-dasharray: 30;
+  animation: dash 1.5s linear infinite;
+  opacity: 80%;
+}
+
+.loader.hidden {
+  display: none;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 30;
+  }
+}
+
+.black-and-white {
+  filter: grayscale(100%);
+  transition: filter 0.5s ease;
+}
+
+.black-and-white:hover {
+  filter: none; /* Remove the grayscale filter on hover */
+}
