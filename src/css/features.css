@@ -33,6 +33,14 @@
   box-shadow: 0px 0px 4px #000;
 }
 
+.feature-h1 {
+  margin-left: 10px;
+}
+
+.feature-p {
+  margin: 10px 10px 30px 10px;
+}
+
 .feature .title {
   margin-top: -35%;
   /* position: absolute;

@@ -76,8 +76,13 @@ const InteractiveArt = () => {
 
   return (
     <>
-      <h1>Interactive Art</h1>
+      <h1 class="feature-h1">Interactive Art</h1>
       <div class="feature">{projectLinks}</div>
+      <p class="feature-p">
+        Interactive art has captivated me the way it has many others. Once I learned how to code, I
+        knew it was essential to my self-worth to start doing art with this newfound skill. I don't
+        often create enough art with code, but you'll find new works as it's released here.
+      </p>
     </>
   )
 }

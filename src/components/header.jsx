@@ -24,7 +24,8 @@ const HeaderTemplate = () => {
           </ul>
         </div>
         <img className="logo" src={logo} alt="" />
-        <h1>Josh Hoegen &raquo; )'( &raquo; &#9835; &raquo; &hearts; &raquo;</h1>
+        {/* <h1>Josh Hoegen &raquo; )'( &raquo; &#9835; &raquo; &hearts; &raquo;</h1> */}
+        <h1>Josh Hoegen &raquo; &#9835; &hearts;</h1>
       </div>
       <div class="drawer"></div>
     </>
