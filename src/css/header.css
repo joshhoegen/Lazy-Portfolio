@@ -1,0 +1,122 @@
+#jh-header {
+  position: fixed;
+  z-index: 10;
+  text-align: center;
+  background: #333;
+  background-image: linear-gradient(to bottom, #333, #252525);
+  border-bottom: 1px solid #014352;
+  width: 100%;
+  min-height: 55px;
+  box-shadow: 0 4px 11px #000;
+}
+
+#jh-header .menu-button {
+  left: 20px;
+  top: 14px;
+  font-size: 20px;
+  position: absolute;
+  border: 0;
+  padding: 6px;
+  cursor: pointer;
+  color: #008FB0;
+  display: inline-block;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  background: none;
+}
+
+#jh-header .menu-button:hover,
+#jh-header .menu-button:focus {
+  background: none;
+}
+
+#jh-header .menu-button:focus {
+    outline: 0px;
+}
+
+#jh-header .menu-button:active {
+    transform: scale(0.99);
+}
+
+#jh-header ul.pages {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 20%;
+  text-align: left;
+  list-style-type: none;
+  margin: 0;
+  padding: 20px;
+  visibility: hidden;
+}
+
+#jh-header ul.pages li {
+  list-style-type: none;
+  margin: 20px 0;
+  padding: 0;
+}
+
+#jh-header ul.pages i {
+  margin: 0 10px 0 0;
+}
+
+#jh-header ul.pages li a:link,
+#jh-header ul.pages li a:visited {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  font: bold 12px/16px Arial, Helvetica;
+}
+
+#jh-header ul.pages li a:link span,
+#jh-header ul.pages li a:visited span {
+  font: normal 10px/10px Helvetica, Arial;
+  color: #008FB0;
+  width: 90%;
+  margin-top: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+
+/*
+==============================================
+fadeIn
+==============================================
+*/
+
+.show {
+	animation-name: fadeIn;
+	-webkit-animation-name: fadeIn;
+
+	animation-duration: 0.6s;
+	-webkit-animation-duration: 0.6s;
+
+	animation-timing-function: ease-in-out;
+	-webkit-animation-timing-function: ease-in-out;
+
+	visibility: visible !important;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0.0;
+	}
+	100% {
+		opacity: 1;
+        display: block;
+	}
+}
+
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0.0;
+	}
+	100% {
+		opacity: 1;
+        display: block;
+	}
+}

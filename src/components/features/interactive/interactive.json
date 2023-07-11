@@ -1,0 +1,18 @@
+{
+  "fractals": {
+    "href": "/fractals",
+    "description": "Use video and audio to create unique and psychedelic video art in your browser!",
+    "title": "Psychedelic Video Fractals",
+    "video": null
+  },
+  "kaleidoscope": {
+    "href": "https://byutifu.com/kaleidoscope",
+    "description": "More video and audio to create situational and psychedelic video art in your browser!",
+    "title": "Crunk Kaleidoscope"
+  },
+  "light-trails": {
+    "href": "https://byutifu.com/trails",
+    "description": "Create pixels or swirls from the color you choose. A nice ambient piece.",
+    "title": "Pixel Trails"
+  }
+}
