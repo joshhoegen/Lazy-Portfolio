@@ -19,3 +19,7 @@ dist/
 # OS stuff
 .DS_Store
 package-lock.json
+
+ssl/
+
+.parcel-cache/
