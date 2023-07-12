@@ -31,4 +31,4 @@ jobs:
         run: npx parcel build src/index.html
 
       - name: Deploy static site to S3 bucket
-        run: aws s3 sync ./dist/ s3://joshhoegen-customresourcestack-gcmhx-s3bucketroot-zwzwehzs0jc9 --delete
+        run: aws s3 sync ./dist/ s3://lazyportfoliostack-websitebucket75c24d94-vag8bjhuro29 --exclude "pages/*" --delete
