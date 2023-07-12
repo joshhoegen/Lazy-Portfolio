@@ -84,6 +84,7 @@ a {
 #jh-page {
   background: linear-gradient(#3330, #0009) no-repeat;
   width: 70%;
+  height: 100vh;
   margin: 153px 50%;
   padding: 0;
   position: absolute;
@@ -99,12 +100,9 @@ a {
   width: 10px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
   #jh-page {
-    width: 62%;
-  }
-  ul.pages {
-    width: 18%;
+    width: 90%;
   }
 }
 

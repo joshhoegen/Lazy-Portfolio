@@ -8,7 +8,6 @@ const HeaderTemplate = () => {
   const [menuToggle, setMenuToggle] = createSignal(false)
 
   const menuHandler = (data) => {
-    console.log(data)
     setMenuToggle(!data)
   }
 
