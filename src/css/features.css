@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 300px;
   margin: 0px 0px 50px;
 }
 
@@ -11,7 +11,7 @@
   position: relative;
   text-align: center;
   width: 300px;
-  height: 300px;
+  height: 280px;
   background-color: #333;
   margin: 10px;
   border-radius: 10px;
@@ -21,16 +21,22 @@
 .feature-child a {
   color: #fff;
   text-decoration: none;
+  display: block;
+  height: 175px;
+  /* max-height: 175px; */
+  overflow: hidden;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 4px #000;
 }
 
 .feature video {
-  max-height: 175px;
-  height: 100%;
   overflow: hidden;
   object-fit: cover;
-  border-radius: 20px;
-  padding: 10px;
-  box-shadow: 0px 0px 4px #000;
+  border-radius: 10px;
+
+  max-height: 175px;
+  height: 100%;
 }
 
 .feature-h1 {
@@ -41,20 +47,50 @@
   margin: 10px 10px 30px 10px;
 }
 
-.feature .title {
-  margin-top: -35%;
-  /* position: absolute;
-  top: 50%;
+.feature a .title {
+  position: absolute;
+  bottom: 20px;
   left: 50%;
-  transform: translate(-50%, -50%); */
+  transform: translate(-50%, 0%);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+.feature a:hover .title {
+  opacity: 0;
 }
 
 .feature .description {
-  margin-top: 35%;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 100;
+  margin-top: 25px;
   /* position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); */
+}
+
+@media (max-width: 900px) {
+  .feature {
+    display: block;
+    /* justify-content: center;
+    align-items: center; */
+    width: 100%;
+    height: 100%;
+    margin: 0px 0px 50px;
+  }
+  .feature-child {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    background-color: #333;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  .feature a .title {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+  }
 }

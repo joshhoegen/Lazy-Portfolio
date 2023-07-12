@@ -18,7 +18,7 @@
   border: 0;
   padding: 6px;
   cursor: pointer;
-  color: #008FB0;
+  color: #008fb0;
   display: inline-block;
   border: none;
   padding: 0;
@@ -33,16 +33,17 @@
 }
 
 #jh-header .menu-button:focus {
-    outline: 0px;
+  outline: 0px;
 }
 
 #jh-header .menu-button:active {
-    transform: scale(0.99);
+  transform: scale(0.99);
 }
 
 #jh-header ul.pages {
   position: absolute;
-  top: 60px;
+  top: 56px;
+  z-index: 1;
   left: 0;
   width: 20%;
   text-align: left;
@@ -58,6 +59,19 @@
   padding: 0;
 }
 
+@media (max-width: 800px) {
+  #jh-header ul.pages {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, #121212, #000);
+  }
+  /* #jh-header ul.pages {
+    animation-name: fadeOut;
+    animation-duration: 0.6s;
+    -webkit-animation-duration: 0.6s;
+  } */
+}
+
 #jh-header ul.pages i {
   margin: 0 10px 0 0;
 }
@@ -67,13 +81,17 @@
   display: block;
   color: #fff;
   text-decoration: none;
-  font: bold 12px/16px Arial, Helvetica;
+  font:
+    bold 12px/16px Arial,
+    Helvetica;
 }
 
 #jh-header ul.pages li a:link span,
 #jh-header ul.pages li a:visited span {
-  font: normal 10px/10px Helvetica, Arial;
-  color: #008FB0;
+  font:
+    normal 10px/10px Helvetica,
+    Arial;
+  color: #008fb0;
   width: 90%;
   margin-top: 5px;
   white-space: nowrap;
@@ -89,34 +107,34 @@ fadeIn
 */
 
 .show {
-	animation-name: fadeIn;
-	-webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-name: fadeIn;
 
-	animation-duration: 0.6s;
-	-webkit-animation-duration: 0.6s;
+  animation-duration: 0.6s;
+  -webkit-animation-duration: 0.6s;
 
-	animation-timing-function: ease-in-out;
-	-webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-timing-function: ease-in-out;
 
-	visibility: visible !important;
+  visibility: visible !important;
 }
 
 @keyframes fadeIn {
-	0% {
-		opacity: 0.0;
-	}
-	100% {
-		opacity: 1;
-        display: block;
-	}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    display: block;
+  }
 }
 
-@-webkit-keyframes fadeIn {
-	0% {
-		opacity: 0.0;
-	}
-	100% {
-		opacity: 1;
-        display: block;
-	}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
 }

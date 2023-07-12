@@ -13,16 +13,16 @@ const videos = {
 }
 
 const InteractiveArt = () => {
-  const playVideo = (key) => {
-    const videoElement = document.getElementById(`video-${key}`)
+  const playVideo = (e, key) => {
+    const videoElement = e.currentTarget
     videoElement.play().catch((error) => {
       // Handle the play() promise rejection
       console.error('Failed to play video:', error)
     })
   }
 
-  const pauseVideo = (key) => {
-    const videoElement = document.getElementById(`video-${key}`)
+  const pauseVideo = (e, key) => {
+    const videoElement = e.currentTarget
     videoElement.pause()
     videoElement.currentTime = 0
   }
@@ -31,8 +31,8 @@ const InteractiveArt = () => {
     interactiveArtKeys.forEach((key) => {
       const videoElement = document.getElementById(`video-${key}`)
       videoElement.playbackRate = 0.5
-      videoElement.addEventListener('mouseout', () => pauseVideo(key))
-      videoElement.addEventListener('mouseover', () => playVideo(key))
+      videoElement.addEventListener('mouseout', (e) => pauseVideo(e, key))
+      videoElement.addEventListener('mouseover', (e) => playVideo(e, key))
     })
 
     // Wait for a user interaction event before triggering video playback
@@ -42,8 +42,8 @@ const InteractiveArt = () => {
   onCleanup(() => {
     interactiveArtKeys.forEach((key) => {
       const videoElement = document.getElementById(`video-${key}`)
-      videoElement.removeEventListener('mouseout', () => pauseVideo(key))
-      videoElement.removeEventListener('mouseover', () => playVideo(key))
+      videoElement.removeEventListener('mouseout', (e) => pauseVideo(e, key))
+      videoElement.removeEventListener('mouseover', (e) => playVideo(e, key))
     })
 
     // Clean up the user interaction event listener
