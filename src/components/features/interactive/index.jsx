@@ -1,61 +1,50 @@
 import { createSignal, onCleanup, onMount } from 'solid-js'
 import interactiveArt from './interactive.json'
-import kaleidoscopeVideo from './media/kaleidoscope.mp4'
-import lightTrailsVideo from './media/light-trails.mp4'
-import fractalsVideo from './media/fractals.mp4'
+import kaleidoscopeVideo from './media/kaleidoscope.gif'
+import kaleidoscopeImage from './media/kaleidoscope.png'
+import lightTrailsVideo from './media/light-trails.gif'
+import lightTrailsImage from './media/light-trails.png'
+import fractalsVideo from './media/fractals.gif'
+import fractalsImage from './media/fractals.png'
 
 const interactiveArtKeys = Object.keys(interactiveArt)
 
+// TODO: I know, I know. So much to do; so little time
 const videos = {
   kaleidoscope: kaleidoscopeVideo,
   'light-trails': lightTrailsVideo,
   fractals: fractalsVideo,
 }
 
+const images = {
+  kaleidoscope: kaleidoscopeImage,
+  'light-trails': lightTrailsImage,
+  fractals: fractalsImage,
+}
+
+const ImageEl = (props) => {
+  const [src, setSrc] = createSignal(props.img)
+
+  const mouseOverHandler = () => {
+    setSrc(props.video)
+  }
+
+  const mouseOutHandler = () => {
+    setSrc(props.img)
+  }
+
+  return (
+    <img
+      onMouseOver={mouseOverHandler}
+      onMouseOut={mouseOutHandler}
+      src={src()}
+      id={props.id}
+      width="100%"
+    />
+  )
+}
+
 const InteractiveArt = () => {
-  const playVideo = (e, key) => {
-    const videoElement = e.currentTarget
-    videoElement.play().catch((error) => {
-      // Handle the play() promise rejection
-      console.error('Failed to play video:', error)
-    })
-  }
-
-  const pauseVideo = (e, key) => {
-    const videoElement = e.currentTarget
-    videoElement.pause()
-    videoElement.currentTime = 0
-  }
-
-  onMount(() => {
-    interactiveArtKeys.forEach((key) => {
-      const videoElement = document.getElementById(`video-${key}`)
-      videoElement.playbackRate = 0.5
-      videoElement.addEventListener('mouseout', (e) => pauseVideo(e, key))
-      videoElement.addEventListener('mouseover', (e) => playVideo(e, key))
-    })
-
-    // Wait for a user interaction event before triggering video playback
-    document.addEventListener('click', handleUserInteraction)
-  })
-
-  onCleanup(() => {
-    interactiveArtKeys.forEach((key) => {
-      const videoElement = document.getElementById(`video-${key}`)
-      videoElement.removeEventListener('mouseout', (e) => pauseVideo(e, key))
-      videoElement.removeEventListener('mouseover', (e) => playVideo(e, key))
-    })
-
-    // Clean up the user interaction event listener
-    document.removeEventListener('click', handleUserInteraction)
-  })
-
-  const handleUserInteraction = () => {
-    interactiveArtKeys.forEach((key) => {
-      playVideo(key)
-    })
-  }
-
   const projectLinks = []
 
   for (const key of interactiveArtKeys) {
@@ -64,7 +53,7 @@ const InteractiveArt = () => {
       <>
         <div class="feature-child">
           <a class="black-and-white" href={feature.href}>
-            <video id={`video-${key}`} muted="true" src={videos[key]} width="100%" />
+            <ImageEl id={`video-${key}`} img={images[key]} video={videos[key]} width="100%" />
 
             <div class="title">{feature.title}</div>
           </a>

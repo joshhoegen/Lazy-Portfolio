@@ -30,7 +30,7 @@
   box-shadow: 0px 0px 4px #000;
 }
 
-.feature video {
+.feature img {
   overflow: hidden;
   object-fit: cover;
   border-radius: 10px;
