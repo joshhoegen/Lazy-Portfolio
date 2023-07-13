@@ -9,6 +9,7 @@ import fractalsImage from './media/fractals.png'
 
 const interactiveArtKeys = Object.keys(interactiveArt)
 
+// TODO: I know, I know. So much to do; so little time
 const videos = {
   kaleidoscope: kaleidoscopeVideo,
   'light-trails': lightTrailsVideo,
@@ -22,15 +23,15 @@ const images = {
 }
 
 const ImageEl = (props) => {
-  const [src, setSrc] = createSignal(props.img);
+  const [src, setSrc] = createSignal(props.img)
 
   const mouseOverHandler = () => {
-    setSrc(props.video);
-  };
+    setSrc(props.video)
+  }
 
   const mouseOutHandler = () => {
-    setSrc(props.img);
-  };
+    setSrc(props.img)
+  }
 
   return (
     <img
@@ -40,11 +41,10 @@ const ImageEl = (props) => {
       id={props.id}
       width="100%"
     />
-  );
-};
+  )
+}
 
 const InteractiveArt = () => {
- 
   const projectLinks = []
 
   for (const key of interactiveArtKeys) {
