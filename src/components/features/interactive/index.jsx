@@ -44,19 +44,7 @@ const ImageEl = (props) => {
 };
 
 const InteractiveArt = () => {
-  // const playVideo = (e, key) => {
-  //   const videoElement = e.currentTarget
-  //   videoElement.src = 
-  // }
-
-  
-
-  // const handleUserInteraction = () => {
-  //   interactiveArtKeys.forEach((key) => {
-  //     playVideo(key)
-  //   })
-  // }
-
+ 
   const projectLinks = []
 
   for (const key of interactiveArtKeys) {
