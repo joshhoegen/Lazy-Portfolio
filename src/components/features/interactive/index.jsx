@@ -23,9 +23,14 @@ const images = {
 
 const ImageEl = (props) => {
   const mouseOverHandler = (e) => {
-    e.currentTarget.src = 
+    e.currentTarget.src = props.video
   }
-  return <img onmouseover={mouseOverHandler} src={props.src} id={props.id} on width="100%" />
+
+  const mouseOutHandler = (e) => {
+    e.currentTarget.src = props.img
+  }
+  
+  return <img onmouseover={mouseOverHandler} onmouseout={mouseOutHandler} src={props.img} id={props.id} width="100%" />
 }
 
 const InteractiveArt = () => {
@@ -50,7 +55,7 @@ const InteractiveArt = () => {
       <>
         <div class="feature-child">
           <a class="black-and-white" href={feature.href}>
-            <img id={`video-${key}`} src={images[key]} width="100%" />
+            <ImageEl id={`video-${key}`} img={images[key]} video={videos[key]} width="100%" />
 
             <div class="title">{feature.title}</div>
           </a>
