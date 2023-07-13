@@ -22,16 +22,26 @@ const images = {
 }
 
 const ImageEl = (props) => {
-  const mouseOverHandler = (e) => {
-    e.currentTarget.src = props.video
-  }
+  const [src, setSrc] = createSignal(props.img);
 
-  const mouseOutHandler = (e) => {
-    e.currentTarget.src = props.img
-  }
-  
-  return <img onmouseover={mouseOverHandler} onmouseout={mouseOutHandler} src={props.img} id={props.id} width="100%" />
-}
+  const mouseOverHandler = () => {
+    setSrc(props.video);
+  };
+
+  const mouseOutHandler = () => {
+    setSrc(props.img);
+  };
+
+  return (
+    <img
+      onMouseOver={mouseOverHandler}
+      onMouseOut={mouseOutHandler}
+      src={src()}
+      id={props.id}
+      width="100%"
+    />
+  );
+};
 
 const InteractiveArt = () => {
   // const playVideo = (e, key) => {
