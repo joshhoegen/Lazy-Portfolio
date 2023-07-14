@@ -67,11 +67,17 @@ const InteractiveArt = () => {
     <>
       <h1 class="feature-h1">Interactive Art</h1>
       <div class="feature">{projectLinks}</div>
-      <p class="feature-p">
-        Interactive art has captivated me the way it has many others. Once I learned how to code, I
-        knew it was essential to my self-worth to start doing art with this newfound skill. I don't
-        often create enough art with code, but you'll find new works as it's released here.
-      </p>
+      <div>
+        <p class="feature-p">
+          In 1999, I would have told ya computers were destroying art... music... all the things I
+          love to create. While draining my soul in the designosphere, I saw my code-monkey
+          co-workers making money and having fun making it. so, I learned to code... As an artist, I
+          knew it was essential to my self-worth to start creating with this newfound medium. Now we
+          have complex 3d worlds & generative art, so here I sit inbetween worlds... Trying to
+          leverage Javascript's interactivity, while aiming to offer some eye & ear candy.
+        </p>
+        <p>- Josh</p>
+      </div>
     </>
   )
 }
