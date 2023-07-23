@@ -1,22 +1,3 @@
-body {
-  padding: 0;
-  margin: 0 auto;
-  width: auto;
-  font:
-    14px 'Lucida Grande',
-    Helvetica,
-    Arial,
-    sans-serif;
-  background: #333;
-  color: #fff;
-  text-shadow: 2px 1px 6px #000;
-  background-image: url(../images/bg-texture.png);
-  background-image: url(../images/bg-texture.png), linear-gradient(to bottom, #333, #252525);
-  /*    animation: animatedBackground 400s linear infinite;
-    -ms-animation: animatedBackground 400s linear infinite;
-    -moz-animation: animatedBackground 400s linear infinite;
-    -webkit-animation: animatedBackground 400s linear infinite;*/
-}
 @keyframes animatedBackground {
   from {
     background-position: 0 0;
@@ -59,7 +40,6 @@ img.logo {
 }
 h1 {
   margin: 10px 0 10px 0;
-  display: inline-block;
 }
 h2 {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
@@ -81,11 +61,27 @@ a {
 .floatLeft {
   float: left;
 }
+.clear-both {
+  clear: both;
+}
+
+p {
+  margin: 20px 20px 30px 20px;
+}
+
+#content {
+  height: 100vh;
+}
+
+.long-text {
+  margin-bottom: 100px;
+}
+
 #jh-page {
   background: linear-gradient(#3330, #0009) no-repeat;
-  width: 70%;
+  width: 80%;
   height: 100vh;
-  margin: 153px 50%;
+  margin: 153px 50% 0 50%;
   padding: 0;
   position: absolute;
   transform: translate(-50%, -53px);
@@ -103,6 +99,7 @@ a {
 @media (max-width: 900px) {
   #jh-page {
     width: 90%;
+    height: auto;
   }
 }
 

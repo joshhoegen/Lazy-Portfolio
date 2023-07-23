@@ -37,6 +37,7 @@ const ImageEl = (props) => {
     <img
       onMouseOver={mouseOverHandler}
       onMouseOut={mouseOutHandler}
+      onClick={mouseOutHandler}
       src={src()}
       id={props.id}
       width="100%"
@@ -67,13 +68,14 @@ const InteractiveArt = () => {
     <>
       <h1 class="feature-h1">Interactive Art</h1>
       <div class="feature">{projectLinks}</div>
-      <div>
-        <p class="feature-p">
+      <div class="long-text">
+        <p>
           In 1999, I would have told ya computers were destroying art... music... all the things I
           love to create. While draining my soul in the designosphere, I saw my code-monkey
           co-workers making money and having fun making it. so, I learned to code... As an artist, I
-          knew it was essential to my self-worth to start creating with this newfound medium. Now we
-          have complex 3d worlds & generative art, so here I sit inbetween worlds... Trying to
+          knew it was my responsibility to start creating with this newfound medium. Since taking on
+          this responsibility, we've propelled into a Brave New World that can renders the universe
+          digitally in 3D & AI-prompted generative art; so here I sit inbetween worlds... Trying to
           leverage Javascript's interactivity, while aiming to offer some eye & ear candy.
         </p>
         <p>- Josh</p>
