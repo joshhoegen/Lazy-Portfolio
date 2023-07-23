@@ -27,6 +27,10 @@
   background: none;
 }
 
+#jh-header h1 {
+  display: inline-block;
+}
+
 #jh-header .menu-button:hover,
 #jh-header .menu-button:focus {
   background: none;
@@ -65,11 +69,22 @@
     height: 100vh;
     background: linear-gradient(to bottom, #121212, #000);
   }
+  #jh-header h1 {
+    display: none;
+  }
   /* #jh-header ul.pages {
     animation-name: fadeOut;
     animation-duration: 0.6s;
     -webkit-animation-duration: 0.6s;
   } */
+}
+
+img.logo {
+  width: 40px;
+  margin: 0 20px 0 0;
+  position: relative;
+  display: inline-block;
+  top: 6px;
 }
 
 #jh-header ul.pages i {
