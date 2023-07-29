@@ -1,7 +1,7 @@
 [
   {
     "title": "JS Art - Pixels",
-    "url": "https://joshhoegen.com/trails",
+    "url": "https://joshhoegen.com/trails/",
     "icon": "star",
     "images": ["img/kaleidoscope.png"],
     "template": "live.html",
@@ -11,7 +11,7 @@
   },
   {
     "title": "JS Art - Kaleidoscope",
-    "url": "https://joshhoegen.com/kaleidoscope",
+    "url": "https://joshhoegen.com/kaleidoscope/",
     "icon": "star",
     "images": ["img/kaleidoscope.png"],
     "template": "soundcloud",
@@ -20,7 +20,7 @@
   },
   {
     "title": "JS Art - Fractals",
-    "url": "https://joshhoegen.com/fractals",
+    "url": "https://joshhoegen.com/fractals/",
     "icon": "star",
     "images": ["img/kaleidoscope.png"],
     "template": "soundcloud",

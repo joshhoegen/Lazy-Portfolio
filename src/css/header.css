@@ -12,8 +12,9 @@
 
 #jh-header .menu-button {
   left: 20px;
-  top: 14px;
-  font-size: 20px;
+  top: 7px;
+  font-size: 30px;
+  line-height: 30px;
   position: absolute;
   border: 0;
   padding: 6px;
