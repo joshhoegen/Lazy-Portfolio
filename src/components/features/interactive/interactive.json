@@ -10,6 +10,11 @@
     "description": "More video and audio to create situational and psychedelic video art in your browser!",
     "title": "Crunk Kaleidoscope"
   },
+  "portal": {
+    "href": "/pages/portal/",
+    "description": "Don't get dizzy! Works best in the dark... or anywhere?",
+    "title": "Portal"
+  },
   "light-trails": {
     "href": "/pages/trails/",
     "description": "Create pixels or swirls from the color you choose. A nice ambient piece.",
