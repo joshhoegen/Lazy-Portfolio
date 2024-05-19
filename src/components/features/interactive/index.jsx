@@ -6,6 +6,8 @@ import lightTrailsVideo from './media/light-trails.gif'
 import lightTrailsImage from './media/light-trails.png'
 import fractalsVideo from './media/fractals.gif'
 import fractalsImage from './media/fractals.png'
+import portalVideo from './media/portal.gif'
+import portalImage from './media/portal.png'
 
 const interactiveArtKeys = Object.keys(interactiveArt)
 
@@ -13,12 +15,14 @@ const interactiveArtKeys = Object.keys(interactiveArt)
 const videos = {
   kaleidoscope: kaleidoscopeVideo,
   'light-trails': lightTrailsVideo,
+  portal: portalVideo,
   fractals: fractalsVideo,
 }
 
 const images = {
   kaleidoscope: kaleidoscopeImage,
   'light-trails': lightTrailsImage,
+  portal: portalImage,
   fractals: fractalsImage,
 }
 
@@ -49,6 +53,7 @@ const InteractiveArt = () => {
   const projectLinks = []
 
   for (const key of interactiveArtKeys) {
+    console.log(key)
     const feature = interactiveArt[key]
     projectLinks.push(
       <>
@@ -74,7 +79,7 @@ const InteractiveArt = () => {
           love to create. While draining my soul in the designosphere, I saw my code-monkey
           co-workers making money and having fun making it. so, I learned to code... As an artist, I
           knew it was my responsibility to start creating with this newfound medium. Since taking on
-          this responsibility, we've propelled into a Brave New World that can renders the universe
+          this responsibility, we've propelled into a Brave New World that can render the universe
           digitally in 3D & AI-prompted generative art; so here I sit inbetween worlds... Trying to
           leverage Javascript's interactivity, while aiming to offer some eye & ear candy.
         </p>
