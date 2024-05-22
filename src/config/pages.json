@@ -7,7 +7,7 @@
     "template": "live.html",
     "modules": ["kaleidescope"],
     "description": "Interactive video art",
-    "order": 3
+    "order": 9
   },
   {
     "title": "JS Art - Kaleidoscope",
@@ -16,7 +16,17 @@
     "images": ["img/kaleidoscope.png"],
     "template": "soundcloud",
     "description": "Interactive video art",
-    "order": 2
+    "order": 8
+  },
+  {
+    "title": "JS Art - Portal",
+    "url": "https://joshhoegen.com/portal/",
+    "icon": "star",
+    "images": ["img/portal.png"],
+    "template": "live.html",
+    "modules": ["portal"],
+    "description": "Interactive video art",
+    "order": 7
   },
   {
     "title": "JS Art - Fractals",
@@ -25,7 +35,7 @@
     "images": ["img/kaleidoscope.png"],
     "template": "soundcloud",
     "description": "Interactive video art",
-    "order": 2
+    "order": 6
   },
   {
     "title": "Flickr | Art",

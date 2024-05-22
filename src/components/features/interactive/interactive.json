@@ -5,15 +5,15 @@
     "title": "Psychedelic Video Fractals",
     "video": null
   },
-  "kaleidoscope": {
-    "href": "/pages/kaleidoscope/",
-    "description": "More video and audio to create situational and psychedelic video art in your browser!",
-    "title": "Crunk Kaleidoscope"
-  },
   "portal": {
     "href": "/pages/portal/",
     "description": "Don't get dizzy! Works best in the dark... or anywhere?",
     "title": "Portal"
+  },
+  "kaleidoscope": {
+    "href": "/pages/kaleidoscope/",
+    "description": "More video and audio to create situational and psychedelic video art in your browser!",
+    "title": "Crunk Kaleidoscope"
   },
   "light-trails": {
     "href": "/pages/trails/",
