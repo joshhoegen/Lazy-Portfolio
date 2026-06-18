@@ -8,7 +8,7 @@ const PUBLIC_PORT = Number(process.env.PORT || 1111)
 const PARCEL_PORT = Number(process.env.PARCEL_PORT || 1112)
 const PARCEL_HOST = '127.0.0.1'
 
-const VIDEO_FRACTALS_ROOT = path.resolve('..', 'video-fractals')
+const VIDEO_FRACTALS_ROOT = path.resolve('..', 'video-fractals-luna')
 const localPageBuilds = new Map([
   ['kaleidoscope', path.join(VIDEO_FRACTALS_ROOT, 'distKaleidoscope')],
   ['fractals', path.join(VIDEO_FRACTALS_ROOT, 'distFractals')],
