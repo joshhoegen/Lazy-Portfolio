@@ -1,8 +1,10 @@
 import { createSignal, onCleanup } from 'solid-js'
-import logo from '../images/jh-logo-80.png'
+// import logo from '../images/jh-logo-80.png'
 // import { render } from 'solid-js/web'
 
 import PagesTemplate from './menuList.jsx'
+
+const logo = new URL('../images/jh-logo-80.png', import.meta.url).toString()
 
 const HeaderTemplate = () => {
   const [menuToggle, setMenuToggle] = createSignal(false)
