@@ -1,29 +1,36 @@
 import { createSignal, onCleanup, onMount } from 'solid-js'
 import interactiveArt from './interactive.json'
-import kaleidoscopeVideo from './media/kaleidoscope.gif'
-import kaleidoscopeImage from './media/kaleidoscope.png'
-import lightTrailsVideo from './media/light-trails.gif'
-import lightTrailsImage from './media/light-trails.png'
-import fractalsVideo from './media/fractals.gif'
-import fractalsImage from './media/fractals.png'
-import portalVideo from './media/portal.gif'
-import portalImage from './media/portal.png'
+// import kaleidoscopeVideo from './media/kaleidoscope.gif'
+// import kaleidoscopeImage from './media/kaleidoscope.png'
+// import lightTrailsVideo from './media/light-trails.gif'
+// import lightTrailsImage from './media/light-trails.png'
+// import fractalsVideo from './media/fractals.gif'
+// import fractalsImage from './media/fractals.png'
+// import portalVideo from './media/portal.gif'
+// import portalImage from './media/portal.png'
 
 const interactiveArtKeys = Object.keys(interactiveArt)
 
 // TODO: I know, I know. So much to do; so little time
-const videos = {
-  kaleidoscope: kaleidoscopeVideo,
-  'light-trails': lightTrailsVideo,
-  portal: portalVideo,
-  fractals: fractalsVideo,
+const videos =  {
+  kaleidoscope: new URL('./media/kaleidoscope.gif', import.meta.url).toString(),
+  'light-trails': new URL('./media/light-trails.gif', import.meta.url).toString(),
+  portal: new URL('./media/portal.gif', import.meta.url).toString(),
+  fractals: new URL('./media/fractals.gif', import.meta.url).toString(),
 }
 
+// const images = {
+//   kaleidoscope: kaleidoscopeImage,
+//   'light-trails': lightTrailsImage,
+//   portal: portalImage,
+//   fractals: fractalsImage,
+// }
+
 const images = {
-  kaleidoscope: kaleidoscopeImage,
-  'light-trails': lightTrailsImage,
-  portal: portalImage,
-  fractals: fractalsImage,
+  kaleidoscope: new URL('./media/kaleidoscope.png', import.meta.url).toString(),
+  'light-trails': new URL('./media/light-trails.png', import.meta.url).toString(),
+  portal: new URL('./media/portal.png', import.meta.url).toString(),
+  fractals: new URL('./media/fractals.png', import.meta.url).toString(),
 }
 
 const ImageEl = (props) => {

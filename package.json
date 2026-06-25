@@ -5,6 +5,7 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-luna": "node scripts/dev-server.mjs",
     "dev": "npx parcel src/index.html --port 1111"
   },
   "keywords": [],
@@ -13,9 +14,9 @@
   "dependencies": {
     "@parcel/transformer-raw": "^2.9.3",
     "babel-preset-solid": "^1.7.7",
-    "parcel": "^2.16.4",
+    "parcel": "^2.9.3",
     "prettier": "^3.0.0",
-    "solid-js": "^1.9.13"
+    "solid-js": "^1.7.7"
   },
   "alias": {
     "seroval-plugins/web": "./node_modules/seroval-plugins/web/index.ts",
