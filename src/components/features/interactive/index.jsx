@@ -10,6 +10,16 @@ import interactiveArt from './interactive.json'
 // import portalImage from './media/portal.png'
 
 const interactiveArtKeys = Object.keys(interactiveArt)
+const isLunaDev = process.env.LUNA_DEV === 'true'
+
+const withProjectionMask = (href) => {
+  if (!isLunaDev) return href
+
+  const url = new URL(href, window.location.origin)
+  url.searchParams.set('projectionMask', 'true')
+
+  return `${url.pathname}${url.search}${url.hash}`
+}
 
 // TODO: I know, I know. So much to do; so little time
 const videos =  {
@@ -65,7 +75,7 @@ const InteractiveArt = () => {
     projectLinks.push(
       <>
         <div class="feature-child">
-          <a class="black-and-white" href={feature.href}>
+          <a class="black-and-white" href={withProjectionMask(feature.href)}>
             <ImageEl id={`video-${key}`} img={images[key]} video={videos[key]} width="100%" />
 
             <div class="title">{feature.title}</div>

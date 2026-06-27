@@ -9,11 +9,39 @@ const PARCEL_PORT = Number(process.env.PARCEL_PORT || 1112)
 const PARCEL_HOST = '127.0.0.1'
 
 const VIDEO_FRACTALS_ROOT = path.resolve('..', 'video-fractals')
-const localPageBuilds = new Map([
-  ['kaleidoscope', path.join(VIDEO_FRACTALS_ROOT, 'distKaleidoscope')],
-  ['fractals', path.join(VIDEO_FRACTALS_ROOT, 'distFractals')],
-  ['portal', path.join(VIDEO_FRACTALS_ROOT, 'distPortal')],
-  ['trails', path.join(VIDEO_FRACTALS_ROOT, 'distTrails')],
+const localPages = new Map([
+  [
+    'kaleidoscope',
+    {
+      target: 'kaleidoscope',
+      port: 2223,
+      buildDir: path.join(VIDEO_FRACTALS_ROOT, 'distKaleidoscope'),
+    },
+  ],
+  [
+    'fractals',
+    {
+      target: 'fractals',
+      port: 2222,
+      buildDir: path.join(VIDEO_FRACTALS_ROOT, 'distFractals'),
+    },
+  ],
+  [
+    'portal',
+    {
+      target: 'portal',
+      port: 2225,
+      buildDir: path.join(VIDEO_FRACTALS_ROOT, 'distPortal'),
+    },
+  ],
+  [
+    'trails',
+    {
+      target: 'trails',
+      port: 2224,
+      buildDir: path.join(VIDEO_FRACTALS_ROOT, 'distTrails'),
+    },
+  ],
 ])
 
 const contentTypes = new Map([
@@ -36,10 +64,58 @@ const parcel = spawn(
   'npx',
   ['parcel', 'src/index.html', '--port', String(PARCEL_PORT), '--host', PARCEL_HOST],
   {
+    env: {
+      ...process.env,
+      LUNA_DEV: 'true',
+    },
     stdio: 'inherit',
     shell: process.platform === 'win32',
   },
 )
+
+const localPageServers = new Map()
+
+const spawnLocalPageServer = (pageName, page) => {
+  if (!fs.existsSync(VIDEO_FRACTALS_ROOT)) {
+    console.warn(`Skipping ${pageName}: ${VIDEO_FRACTALS_ROOT} does not exist`)
+    return null
+  }
+
+  const child = spawn(
+    'npx',
+    [
+      'parcel',
+      '--target',
+      page.target,
+      '--dist-dir',
+      page.buildDir,
+      '--port',
+      String(page.port),
+      '--host',
+      PARCEL_HOST,
+    ],
+    {
+      cwd: VIDEO_FRACTALS_ROOT,
+      stdio: 'inherit',
+      shell: process.platform === 'win32',
+    },
+  )
+
+  child.on('exit', (code, signal) => {
+    localPageServers.delete(pageName)
+
+    if (code || signal) {
+      console.warn(`${pageName} dev server exited`, { code, signal })
+    }
+  })
+
+  localPageServers.set(pageName, child)
+  return child
+}
+
+for (const [pageName, page] of localPages) {
+  spawnLocalPageServer(pageName, page)
+}
 
 const writeJson = (response, data) => {
   response.writeHead(200, { 'content-type': 'application/json; charset=utf-8' })
@@ -48,13 +124,25 @@ const writeJson = (response, data) => {
 
 const rewriteLocalPageHtml = (html, pageName) => {
   const pageRoot = `/pages/${pageName}`
+  const assetPattern = /^(?:css|gif|ico|jpeg|jpg|js|json|map|mp4|png|svg|webm)$/i
+  const rewriteAssetPath = (assetPath) => {
+    if (assetPath.startsWith(`${pageRoot}/`)) return assetPath
+    if (assetPath.startsWith('pages/')) return `/${assetPath}`
+
+    return `${pageRoot}/${assetPath}`
+  }
 
   return html
     .replace(/\b(src|href|action|poster)=["']\/([^"']+)["']/gi, (match, attribute, assetPath) => {
-      return `${attribute}="${pageRoot}/${assetPath}"`
+      return `${attribute}="${rewriteAssetPath(assetPath)}"`
+    })
+    .replace(/(["'])\/([^"'<>]+\.([a-z0-9]+))\1/gi, (match, quote, assetPath, extension) => {
+      if (!assetPattern.test(extension)) return match
+
+      return `${quote}${rewriteAssetPath(assetPath)}${quote}`
     })
     .replace(/url\((['"]?)\/([^'")]+)\1\)/gi, (match, quote, assetPath) => {
-      return `url(${quote}${pageRoot}/${assetPath}${quote})`
+      return `url(${quote}${rewriteAssetPath(assetPath)}${quote})`
     })
 }
 
@@ -72,13 +160,13 @@ const getLocalPageRequest = (requestUrl = '/') => {
   if (!match) return null
 
   const [, pageName, assetPath = ''] = match
-  const buildDir = localPageBuilds.get(pageName)
+  const page = localPages.get(pageName)
 
-  if (!buildDir) return null
+  if (!page) return null
 
   return {
     pageName,
-    buildDir,
+    ...page,
     assetPath: assetPath || 'index.html',
   }
 }
@@ -128,20 +216,45 @@ const serveLocalPageRequest = (pageRequest, response) => {
 }
 
 const missingLocalPageBuilds = () =>
-  [...localPageBuilds.entries()]
-    .filter(([, buildDir]) => !fs.existsSync(path.join(buildDir, 'index.html')))
+  [...localPages.entries()]
+    .filter(([, page]) => !fs.existsSync(path.join(page.buildDir, 'index.html')))
     .map(([pageName]) => pageName)
 
-const proxyHttpRequest = (clientRequest, clientResponse) => {
+const proxyHttpRequest = (clientRequest, clientResponse, proxyOptions = {}) => {
+  const {
+    hostname = PARCEL_HOST,
+    port = PARCEL_PORT,
+    path: proxyPath = clientRequest.url,
+    rewriteHtml,
+    notReadyMessage = 'Parcel dev server is not ready yet. Refresh in a moment.\n',
+  } = proxyOptions
+
   const proxyRequest = http.request(
     {
-      hostname: PARCEL_HOST,
-      port: PARCEL_PORT,
-      path: clientRequest.url,
+      hostname,
+      port,
+      path: proxyPath,
       method: clientRequest.method,
       headers: clientRequest.headers,
     },
     (proxyResponse) => {
+      const contentType = String(proxyResponse.headers['content-type'] || '')
+
+      if (rewriteHtml && contentType.includes('text/html')) {
+        let html = ''
+        proxyResponse.setEncoding('utf8')
+        proxyResponse.on('data', (chunk) => {
+          html += chunk
+        })
+        proxyResponse.on('end', () => {
+          const headers = { ...proxyResponse.headers }
+          delete headers['content-length']
+          clientResponse.writeHead(proxyResponse.statusCode || 502, headers)
+          clientResponse.end(rewriteHtml(html))
+        })
+        return
+      }
+
       clientResponse.writeHead(proxyResponse.statusCode || 502, proxyResponse.headers)
       proxyResponse.pipe(clientResponse)
     },
@@ -149,10 +262,28 @@ const proxyHttpRequest = (clientRequest, clientResponse) => {
 
   proxyRequest.on('error', () => {
     clientResponse.writeHead(502, { 'content-type': 'text/plain; charset=utf-8' })
-    clientResponse.end('Parcel dev server is not ready yet. Refresh in a moment.\n')
+    clientResponse.end(notReadyMessage)
   })
 
   clientRequest.pipe(proxyRequest)
+}
+
+const proxyLocalPageRequest = (pageRequest, request, response) => {
+  const pagePrefix = `pages/${pageRequest.pageName}/`
+  const assetPath = pageRequest.assetPath.startsWith(pagePrefix)
+    ? pageRequest.assetPath.slice(pagePrefix.length)
+    : pageRequest.assetPath
+  const proxyPath = `/${assetPath === 'index.html' ? '' : assetPath}${
+    new URL(request.url, `http://localhost:${PUBLIC_PORT}`).search
+  }`
+
+  response.setHeader('x-lazy-portfolio-dev-proxy', 'video-fractals')
+  proxyHttpRequest(request, response, {
+    port: pageRequest.port,
+    path: proxyPath,
+    rewriteHtml: (html) => rewriteLocalPageHtml(html, pageRequest.pageName),
+    notReadyMessage: `${pageRequest.pageName} dev server is not ready yet. Refresh in a moment.\n`,
+  })
 }
 
 const server = http.createServer((request, response) => {
@@ -166,7 +297,16 @@ const server = http.createServer((request, response) => {
       ok: true,
       server: 'lazy-portfolio dev wrapper',
       port: PUBLIC_PORT,
-      localPageBuilds: Object.fromEntries(localPageBuilds),
+      localPages: Object.fromEntries(localPages),
+      localPageServers: Object.fromEntries(
+        [...localPages].map(([pageName, page]) => [
+          pageName,
+          {
+            port: page.port,
+            running: localPageServers.has(pageName),
+          },
+        ]),
+      ),
       missingLocalPageBuilds: missingLocalPageBuilds(),
     })
     return
@@ -178,14 +318,14 @@ const server = http.createServer((request, response) => {
       route: request.url,
       localBuildDir: localPageRequest.buildDir,
       localAssetPath: localPageRequest.assetPath,
+      localDevServer: `http://${PARCEL_HOST}:${localPageRequest.port}`,
     })
     return
   }
 
   if (localPageRequest) {
-    console.log(`Serving local page ${request.url} -> ${localPageRequest.buildDir}`)
-    response.setHeader('x-lazy-portfolio-dev-proxy', 'local-page')
-    serveLocalPageRequest(localPageRequest, response)
+    console.log(`Proxying local page ${request.url} -> ${localPageRequest.target}:${localPageRequest.port}`)
+    proxyLocalPageRequest(localPageRequest, request, response)
     return
   }
 
@@ -214,6 +354,9 @@ server.on('upgrade', (request, socket, head) => {
 const shutdown = () => {
   server.close()
   parcel.kill()
+  for (const child of localPageServers.values()) {
+    child.kill()
+  }
 }
 
 process.on('SIGINT', shutdown)
@@ -228,6 +371,9 @@ server.listen(PUBLIC_PORT, '127.0.0.1', () => {
   console.log(`Local dev server: http://localhost:${PUBLIC_PORT}`)
   console.log(`Parcel is running behind it on http://${PARCEL_HOST}:${PARCEL_PORT}`)
   console.log(`Local video-fractals root: ${VIDEO_FRACTALS_ROOT}`)
+  for (const [pageName, page] of localPages) {
+    console.log(`${pageName} dev server: http://${PARCEL_HOST}:${page.port}`)
+  }
   console.log(
     missingBuilds.length
       ? `Missing local page builds: ${missingBuilds.join(', ')}`
