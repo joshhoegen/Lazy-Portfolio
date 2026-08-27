@@ -1,5 +1,12 @@
 [
   {
+    "title": "JS Art - Studio",
+    "url": "https://joshhoegen.com/studio/",
+    "icon": "star",
+    "description": "Build your own interactive video art",
+    "order": 10
+  },
+  {
     "title": "JS Art - Pixels",
     "url": "https://joshhoegen.com/trails/",
     "icon": "star",
