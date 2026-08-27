@@ -42,6 +42,14 @@ const localPages = new Map([
       buildDir: path.join(VIDEO_FRACTALS_ROOT, 'distTrails'),
     },
   ],
+  [
+    'studio',
+    {
+      target: 'studio',
+      port: 2226,
+      buildDir: path.join(VIDEO_FRACTALS_ROOT, 'distStudio'),
+    },
+  ],
 ])
 
 const contentTypes = new Map([

@@ -100,6 +100,10 @@ const InteractiveArt = () => {
           digitally in 3D & AI-prompted generative art; so here I sit inbetween worlds... Trying to
           leverage Javascript's interactivity, while aiming to offer some eye & ear candy.
         </p>
+        <p>
+          Want to mix the effects yourself? Open the <a href="/studio/">Video Art Studio</a> and
+          build your own experience.
+        </p>
         <p>- Josh</p>
       </div>
     </>
