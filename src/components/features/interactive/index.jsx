@@ -104,6 +104,9 @@ const InteractiveArt = () => {
           Want to mix the effects yourself? Open the <a href="/studio/">Video Art Studio</a> and
           build your own experience.
         </p>
+        <p>
+          PS: An FYI: I've been doing this wayyyy before AI: The OG: <a href="https://github.com/joshhoegen/Interactive-Video-Kaleidoscope/commits/master/?after=7eefd2a18faa6ffc7f38368f638250c8b3156624+139" target="_blank">Kaleidoscope</a>
+        </p>
         <p>- Josh</p>
       </div>
     </>
