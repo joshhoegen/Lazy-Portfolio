@@ -38,6 +38,7 @@ const videos =  {
 
 const images = {
   kaleidoscope: new URL('./media/kaleidoscope.png', import.meta.url).toString(),
+  meandian: new URL('./media/meandian.png', import.meta.url).toString(),
   'light-trails': new URL('./media/light-trails.png', import.meta.url).toString(),
   portal: new URL('./media/portal.png', import.meta.url).toString(),
   fractals: new URL('./media/fractals.png', import.meta.url).toString(),
@@ -47,7 +48,7 @@ const ImageEl = (props) => {
   const [src, setSrc] = createSignal(props.img)
 
   const mouseOverHandler = () => {
-    setSrc(props.video)
+    setSrc(props.video || props.img)
   }
 
   const mouseOutHandler = () => {

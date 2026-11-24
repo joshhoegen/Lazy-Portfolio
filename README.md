@@ -15,4 +15,4 @@ ffmpeg -i portal.mp4 -filter_complex 'fps=10,scale=320:-1:flags=lanczos,split [o
 ```
 ffmpeg -i portal.mp4 -vf "select=eq(n\,0)" -q:v 3 portal.png
 
-```
+``` 

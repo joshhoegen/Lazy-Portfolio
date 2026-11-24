@@ -4,6 +4,11 @@
     "description": "More video and audio to create situational and psychedelic video art in your browser!",
     "title": "Crunk Kaleidoscope"
   },
+  "meandian": {
+    "href": "/studio/",
+    "description": "Stealing a little inspiration from xkcd and turning it into psychedelic video art. Try Meandian in the Studio!",
+    "title": "Meandian"
+  },
   "fractals": {
     "href": "/pages/fractals/",
     "description": "Use video and audio to create unique and psychedelic video art (GPU heavy; use a performant phone/computer)!",
