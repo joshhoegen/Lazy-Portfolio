@@ -19,6 +19,14 @@ const localPages = new Map([
     },
   ],
   [
+    'meandian',
+    {
+      target: 'meandian',
+      port: 2230,
+      buildDir: path.join(VIDEO_FRACTALS_ROOT, 'distMeandian'),
+    },
+  ],
+  [
     'fractals',
     {
       target: 'fractals',
